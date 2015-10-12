@@ -1,9 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.31101.0
+VisualStudioVersion = 12.0.30501.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "kulturPRO", "kulturPRO.csproj", "{D95EC3CC-E09B-42F3-B2BD-C3ED3F9A82DF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Database", "..\Database\Database.csproj", "{33AC6B02-4DEF-4526-9C42-DE6418647F56}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Database.Init", "Database.Init\Database.Init.csproj", "{B2A20C67-E562-4B12-8EB1-A5F646A4CAA2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +19,14 @@ Global
 		{D95EC3CC-E09B-42F3-B2BD-C3ED3F9A82DF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D95EC3CC-E09B-42F3-B2BD-C3ED3F9A82DF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D95EC3CC-E09B-42F3-B2BD-C3ED3F9A82DF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{33AC6B02-4DEF-4526-9C42-DE6418647F56}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{33AC6B02-4DEF-4526-9C42-DE6418647F56}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{33AC6B02-4DEF-4526-9C42-DE6418647F56}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{33AC6B02-4DEF-4526-9C42-DE6418647F56}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B2A20C67-E562-4B12-8EB1-A5F646A4CAA2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B2A20C67-E562-4B12-8EB1-A5F646A4CAA2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B2A20C67-E562-4B12-8EB1-A5F646A4CAA2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B2A20C67-E562-4B12-8EB1-A5F646A4CAA2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
