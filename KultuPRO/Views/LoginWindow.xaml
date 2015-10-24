@@ -1,0 +1,95 @@
+﻿<Window x:Class="KulturPRO.Views.LoginWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:util="clr-namespace:KulturPRO.Utillities"
+        xmlns:local="clr-namespace:KulturPRO"
+        Title="LoginWindow" Height="{util:SettingBinding Path=LoginWindowHeight}" WindowStartupLocation="CenterScreen" Width="{util:SettingBinding Path=LoginWindowWidth}" Style="{StaticResource WindowStyle}" SizeChanged="Window_SizeChanged">
+    <Grid>
+        <Grid.RowDefinitions>
+            <!-- Height 3* and Height * means they are proportional First Row's Height 3:1 Second Row's Height-->
+            <RowDefinition Height="3*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Button x:Name="btExit" Grid.Column="1" Panel.ZIndex="5" BorderThickness="1" BorderBrush="Black" Height="30" Width="30" HorizontalAlignment="Right" VerticalAlignment="Top" Padding="0" Content="x" FontSize="18" HorizontalContentAlignment="Center" VerticalContentAlignment="Top" Command="{StaticResource ExitCommand}" CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}}">
+            <Button.Background>
+                <SolidColorBrush Color="Brown" Opacity="0.1"/>
+            </Button.Background>
+        </Button>
+        <Border x:Name="brTop" VerticalAlignment="Top" BorderBrush="Black" BorderThickness="0,0,0,1" HorizontalAlignment="Stretch" MinHeight="30" MouseLeftButtonDown="brTop_MouseLeftButtonDown">
+            <Border.Background>
+                <SolidColorBrush Color="{util:SettingBinding Path=TopBarBrush}"/>
+            </Border.Background>
+        </Border>
+        <Border HorizontalAlignment="Stretch" VerticalAlignment="Stretch" MinHeight="300" MinWidth="500" Margin="40,40,40,19" BorderBrush="LemonChiffon" BorderThickness="1">
+            <Grid Margin="10" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="3*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+
+                <Label x:Name="lbLogin" Content="Login" Padding="0" HorizontalAlignment="Left" VerticalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">
+                    <Label.FontSize>
+                        <MultiBinding Converter="{StaticResource FontConverter}">
+                            <Binding Source="{StaticResource Font30}"/>
+                            <Binding Source="{StaticResource FontConverter}" Path="LoginWindowFontMultiplier"/>
+                        </MultiBinding>
+                    </Label.FontSize>
+                </Label>
+                <TextBox x:Name="tbLogin" Text="{Binding Source={StaticResource User}, Path=Login,Mode=TwoWay}" VerticalAlignment="Center" HorizontalAlignment="Stretch" Grid.Column="1" Padding="0">
+                    <TextBox.FontSize>
+                        <MultiBinding Converter="{StaticResource FontConverter}">
+                            <Binding Source="{StaticResource Font30}"/>
+                            <Binding Source="{StaticResource FontConverter}" Path="LoginWindowFontMultiplier"/>
+                        </MultiBinding>
+                    </TextBox.FontSize>
+                </TextBox>
+                <Label x:Name="lbPassword" Padding="0" Content="Hasło" Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">
+                    <Label.FontSize>
+                        <MultiBinding Converter="{StaticResource FontConverter}">
+                            <Binding Source="{StaticResource Font30}"/>
+                            <Binding Source="{StaticResource FontConverter}" Path="LoginWindowFontMultiplier"/>
+                        </MultiBinding>
+                    </Label.FontSize>
+                </Label>
+                <TextBox x:Name="tbPassword" Text="{Binding Source={StaticResource User}, Path=Password,Mode=TwoWay}" VerticalAlignment="Center" HorizontalAlignment="Stretch" Grid.Column="1" Grid.Row="1" Padding="0">
+                    <TextBox.FontSize>
+                        <MultiBinding Converter="{StaticResource FontConverter}">
+                            <Binding Source="{StaticResource Font30}"/>
+                            <Binding Source="{StaticResource FontConverter}" Path="LoginWindowFontMultiplier"/>
+                        </MultiBinding>
+                    </TextBox.FontSize>
+                </TextBox>
+            </Grid>
+        </Border>
+
+        <Grid Grid.Row="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" MinHeight="50">
+            <Button x:Name="btLog" Command="{StaticResource LoginCommand}" Content="Zaloguj" Margin="50" Style="{StaticResource ButtonStyle}" MinWidth="200" HorizontalAlignment="Left" VerticalAlignment="Stretch">
+                <Button.CommandParameter>
+                    <MultiBinding Converter="{StaticResource LoginAndPasswordConverter}">
+                        <Binding Source="{StaticResource User}" Path="Login"/>
+                        <Binding Source="{StaticResource User}" Path="Password"/>
+                    </MultiBinding>
+                </Button.CommandParameter>
+                <Button.FontSize>
+                    <MultiBinding Converter="{StaticResource FontConverter}">
+                        <Binding Source="{StaticResource Font28}"/>
+                        <Binding Source="{StaticResource FontConverter}" Path="LoginWindowFontMultiplier"/>
+                    </MultiBinding>
+                </Button.FontSize>
+            </Button>
+            <Button x:Name="btQuit" Content="Wyjdź" Command="{StaticResource ExitCommand}" CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}} }" Margin="50" Style="{StaticResource ButtonStyle}" MinWidth="200" HorizontalAlignment="Right" VerticalAlignment="Stretch">
+                <Button.FontSize>
+                    <MultiBinding Converter="{StaticResource FontConverter}">
+                        <Binding Source="{StaticResource Font28}"/>
+                        <Binding Source="{StaticResource FontConverter}" Path="LoginWindowFontMultiplier"/>
+                    </MultiBinding>
+                </Button.FontSize>
+            </Button>
+        </Grid>
+    </Grid>
+</Window>
