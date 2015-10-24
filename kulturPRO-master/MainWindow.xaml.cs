@@ -32,6 +32,7 @@ namespace kulturPRO
         public async void Window_Loaded(object sender, RoutedEventArgs e)
         {
             await InitializeText();
+            //throw new Exception();
         }
 
         private async Task InitializeText()

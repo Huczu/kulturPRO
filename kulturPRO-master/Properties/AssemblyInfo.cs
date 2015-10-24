@@ -15,6 +15,7 @@ using System.Windows;
 [assembly: AssemblyCopyright("Copyright ©  2015")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
+//[assembly: log4net.Config.XmlConfigurator(ConfigFile = "XMLFile.xml", Watch = true)]
 
 // Ustawienie wartości ComVisible na false sprawia, że typy w tym zestawie nie będą widoczne 
 // dla składników COM.  Jeśli potrzebny jest dostęp do typu w tym zestawie z 
