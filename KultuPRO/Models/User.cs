@@ -1,51 +1,36 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.ComponentModel;
 
-namespace KulturPRO.Model
+namespace Database.Models
 {
-    class User : INotifyPropertyChanged
+    public class User
     {
-        string _login = "Pat";
-        string _password = "mikol";
+        [Key]
+        public long Id { get; set; }
 
-        public string Login
+        [Required]
+        [Index(IsUnique = true)]
+        public string Login { get; set; }
+
+        [Required]
+        public string Password { get; set; }
+
+        [Required]
+        public string FirstName { get; set; }
+
+        [Required]
+        public string Surname { get; set; }
+
+        public string FullName
         {
             get
             {
-                return _login;
-            }
-            set
-            {
-                _login = value;
-                OnPropertyChanged("Login");
-            }
-        }
-        public string Password
-        {
-            get
-            {
-                return _password;
-            }
-            set
-            {
-                _password = value;
-                OnPropertyChanged("Password");
-            }
-        }
-
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        public void OnPropertyChanged(string propertyName)
-        {
-            var handler = PropertyChanged;
-            if(handler!=null)
-            {
-                handler(this, new PropertyChangedEventArgs(propertyName));
+                return FirstName + " " + Surname;
             }
         }
     }
