@@ -28,6 +28,11 @@ namespace KulturPRO.ViewModels
             return true;
         }
 
+        public void SwitchView()
+        {
+            Utillities.WindowAccessMethods.SwitchView(new Views.ExampleView());
+        }
+
         //dodajecie właściwość z klasy FunctionalList
         public FunctionalList FunctionalList
         {
@@ -35,25 +40,23 @@ namespace KulturPRO.ViewModels
             set;
         }
 
+        public ICommand SwitchViewCommand
+        {
+            get;
+
+            set;
+        }
+
         //tworzymy konstruktor
         public FirstViewModel()
         {
-            //tworzymy listę funkcji (metod z podpisami przycisków)
-            List<Function> listFunction = new List<Function>();
-
-            //w taki sposób komendę przypisujemy do danej metody, jeżeli mamy taką potrzebę, można dodać po przecinku warunek możliwości wciśnięcia kontrolki wykonującej metodę (tutaj metoda Condition),
-            //jeżeli wpiszemy ExampleCommand = new RelayCommand(o => ExampleMethod()); będzie można komendę wykonać bez żadnego warunku
-            ExampleCommand = new RelayCommand(o => ExampleMethod(),o => Condition());
-
-            //łączymy komendę z napisem na przycisku
-            Function function = new Function("Przykład", ExampleCommand);
-
-            //każdą Function dodajemy do listy funkcji
-            listFunction.Add(function);
-
-            //tworzymy sobie nową functional list dopisując nagłówek listy
-            ExampleFunctionalList = new FunctionalList("Nagłówek", listFunction);
+            SwitchViewCommand = new RelayCommand(o => SwitchView());
+            FunctionalList = new FunctionalList("test", new List<Function>
+            {
+                new Function("przycisk", SwitchViewCommand)
+            });
         }
+
 
         //teraz przechodzimy do MainWindow.xaml.cs
     }

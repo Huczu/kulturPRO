@@ -21,6 +21,7 @@ namespace KulturPRO.ViewModels
             set;
         }
 
+        public FunctionalList() {}
         public FunctionalList(string header,List<Function> methodsList)
         {
             Header = header;

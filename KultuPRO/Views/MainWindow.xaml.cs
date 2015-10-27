@@ -38,20 +38,18 @@ namespace KulturPRO.Views
             Expander expander = new Expander();
             expander.HorizontalAlignment = HorizontalAlignment.Stretch;
             expander.VerticalAlignment = VerticalAlignment.Stretch;
-            expander.Header = exampleOnListViewModel.ExampleFunctionalList.Header;
+            expander.Header = exampleOnListViewModel.FunctionalList.Header;
 
             StackPanel stackpanel = new StackPanel();
             stackpanel.VerticalAlignment = VerticalAlignment.Stretch;
             stackpanel.HorizontalAlignment = HorizontalAlignment.Stretch;
       
-            foreach(var function in exampleOnListViewModel.ExampleFunctionalList.MethodsList)
+            foreach(var function in exampleOnListViewModel.FunctionalList.MethodsList)
             {
-                MessageBox.Show("Jestem!");
                 Button button = new Button();
                 button.HorizontalAlignment = HorizontalAlignment.Stretch;
                 button.VerticalAlignment = VerticalAlignment.Stretch;
                 button.Content = function.Name;
-                MessageBox.Show(function.Name);
                 button.Command = function.Command;
                 button.Style = (Style)FindResource("ButtonStyle");
 
