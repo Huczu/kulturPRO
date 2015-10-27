@@ -33,7 +33,7 @@ namespace KulturPRO.Views
             DragMove();
         }
         //to Was nie interesuje
-        private void AddNewItem(ViewModels.OnListViewModel exampleOnListViewModel)
+        private void AddNewItem(ViewModels.IOnListViewModel exampleOnListViewModel)
         {
             Expander expander = new Expander();
             expander.HorizontalAlignment = HorizontalAlignment.Stretch;

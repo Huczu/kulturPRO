@@ -9,7 +9,7 @@ namespace KulturPRO.ViewModels
 {
     //tworzycie klasę dziedziczącą po OnListViewModel
 
-    public class FirstViewModel : OnListViewModel
+    public class FirstViewModel : IOnListViewModel
     {
         //dodajecie metody i do każdej metody właściwość ICommand
         public ICommand FirstCommand { get; set; }

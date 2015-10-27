@@ -6,7 +6,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 using Database.Services;
-using kulturPRO.Utillities;
 
 namespace KulturPRO
 {
@@ -15,11 +14,5 @@ namespace KulturPRO
     /// </summary>
     public partial class App : Application
     {
-        protected override void OnStartup(StartupEventArgs e)
-        {
-            base.OnStartup(e);
-
-            MapperConfig.Config();
-        }
     }
 }
