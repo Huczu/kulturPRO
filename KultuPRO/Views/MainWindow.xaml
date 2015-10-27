@@ -1,0 +1,53 @@
+﻿<Window x:Class="KulturPRO.Views.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:util="clr-namespace:KulturPRO.Utillities"
+        Title="MainWindow" Height="{util:SettingBinding Path=MainWindowHeight}" WindowStartupLocation="CenterScreen" Width="{util:SettingBinding Path=MainWindowWidth}" Style="{StaticResource WindowStyle}">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="4*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Column="1" HorizontalAlignment="Right" Panel.ZIndex="5"  VerticalAlignment="Top" Orientation="Horizontal">
+            <Button x:Name="btSettings" Height="30" Width="30" Command="{StaticResource ShowSettingsCommand}">
+                <Button.Background>
+                    <ImageBrush ImageSource="/Icons/settings.png"/>
+                </Button.Background>
+            </Button>
+            <Button x:Name="btExit" BorderThickness="1" BorderBrush="Black" Height="30" Width="30" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Padding="0" Content="x" FontSize="18" HorizontalContentAlignment="Center" VerticalContentAlignment="Top" Command="{StaticResource ExitCommand}" CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}}">
+                <Button.Background>
+                    <SolidColorBrush Color="Brown" Opacity="0.1"/>
+                </Button.Background>
+            </Button>
+        </StackPanel>
+        
+        <Border x:Name="brTop" Grid.ColumnSpan="2" BorderThickness="2" BorderBrush="Black" VerticalAlignment="Top" HorizontalAlignment="Stretch" MinHeight="30" MouseLeftButtonDown="brTop_MouseLeftButtonDown">
+            <Border.Background>
+                <SolidColorBrush Color="{util:SettingBinding Path=TopBarBrush}"/>
+            </Border.Background>
+        </Border>
+        <Border x:Name="brRight" Grid.Column="1" Grid.Row="1" BorderBrush="Black" BorderThickness="2,0,2,2"/>
+        <!-- Control below allows to change it's content, see settings example -->
+        <Border BorderThickness="2,0,0,2" BorderBrush="Black" Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+        <ContentControl x:Name="ccChangeableContent" Content="{Binding Source={StaticResource WindowAccessMethods}, Path=MainContent}" Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="5" />
+        <StackPanel x:Name="spFunctionality" Margin="10,5" Grid.Column="1" Grid.Row="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+            <!-- Expander is a control to group controls. I'll modify its appearance soon. -->
+            <Expander x:Name="eExample" Header="Przykład 1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch">
+                <StackPanel  HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                    <Button x:Name="btOne" Style="{StaticResource ButtonStyle}" Content="Pierwszy przycisk"/>
+                    <Button x:Name="btTwo" Style="{StaticResource ButtonStyle}" Content="Drugi przycisk"/>
+                </StackPanel>
+            </Expander>
+            <Expander x:Name="eExample2" Header="Przykład 2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch">
+                <StackPanel  HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                    <Button x:Name="btThree" Style="{StaticResource ButtonStyle}"  Content="Pierwszy przycisk"/>
+                    <Button x:Name="btFour" Style="{StaticResource ButtonStyle}"  Content="Drugi przycisk"/>
+                </StackPanel>
+            </Expander>
+        </StackPanel>
+    </Grid>
+</Window>
