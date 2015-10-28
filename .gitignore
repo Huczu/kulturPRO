@@ -186,3 +186,7 @@ FakesAssemblies/
 GeneratedArtifacts/
 _Pvt_Extensions/
 ModelManifest.xml
+
+#Include SQL.Interop.dll files cause fuck you that's why
+!Database/x86/SQLite.Interop.dll
+!Databasae/x64/SQLite.Interop.dll
