@@ -14,5 +14,12 @@ namespace KulturPRO
     /// </summary>
     public partial class App : Application
     {
+        protected override void OnStartup(StartupEventArgs e)
+        {
+            UserService service = new UserService();
+            var user = service.GetUserById(1).Result;
+
+            base.OnStartup(e);
+        }
     }
 }
