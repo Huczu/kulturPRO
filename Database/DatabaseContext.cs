@@ -8,10 +8,11 @@ using System.Threading.Tasks;
 using SQLite.CodeFirst;
 using Database.Models;
 using Database.Utils;
+using TrackerEnabledDbContext;
 
 namespace Database
 {
-    public class DatabaseContext : DbContext
+    public class DatabaseContext : TrackerContext
     {
         public DatabaseContext()
             : base("db")
