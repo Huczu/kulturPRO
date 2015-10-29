@@ -40,7 +40,7 @@
                         </MultiBinding>
                     </Label.FontSize>
                 </Label>
-                <TextBox x:Name="tbLogin" Text="{Binding Source={StaticResource User}, Path=Login,Mode=TwoWay}" VerticalAlignment="Center" HorizontalAlignment="Stretch" Grid.Column="1" Padding="0">
+                <TextBox x:Name="tbLogin" Text="Pat" VerticalAlignment="Center" HorizontalAlignment="Stretch" Grid.Column="1" Padding="0">
                     <TextBox.FontSize>
                         <MultiBinding Converter="{StaticResource FontConverter}">
                             <Binding Source="{StaticResource Font30}"/>
@@ -56,7 +56,7 @@
                         </MultiBinding>
                     </Label.FontSize>
                 </Label>
-                <TextBox x:Name="tbPassword" Text="{Binding Source={StaticResource User}, Path=Password,Mode=TwoWay}" VerticalAlignment="Center" HorizontalAlignment="Stretch" Grid.Column="1" Grid.Row="1" Padding="0">
+                <TextBox x:Name="tbPassword" Text="mikol" VerticalAlignment="Center" HorizontalAlignment="Stretch" Grid.Column="1" Grid.Row="1" Padding="0">
                     <TextBox.FontSize>
                         <MultiBinding Converter="{StaticResource FontConverter}">
                             <Binding Source="{StaticResource Font30}"/>
@@ -68,13 +68,7 @@
         </Border>
 
         <Grid Grid.Row="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" MinHeight="50">
-            <Button x:Name="btLog" Command="{StaticResource LoginCommand}" Content="Zaloguj" Margin="50" Style="{StaticResource ButtonStyle}" MinWidth="200" HorizontalAlignment="Left" VerticalAlignment="Stretch">
-                <Button.CommandParameter>
-                    <MultiBinding Converter="{StaticResource LoginAndPasswordConverter}">
-                        <Binding Source="{StaticResource User}" Path="Login"/>
-                        <Binding Source="{StaticResource User}" Path="Password"/>
-                    </MultiBinding>
-                </Button.CommandParameter>
+            <Button x:Name="btLog" Command="{StaticResource LoginCommand}" Content="Zaloguj" Margin="50" Style="{StaticResource ButtonStyle}" MinWidth="200" HorizontalAlignment="Left" VerticalAlignment="Stretch" CommandParameter="example">
                 <Button.FontSize>
                     <MultiBinding Converter="{StaticResource FontConverter}">
                         <Binding Source="{StaticResource Font28}"/>
