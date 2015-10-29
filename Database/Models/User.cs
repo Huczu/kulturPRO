@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace Database.Models
 {
+    [TrackChanges]
     public class User
     {
         [Key]

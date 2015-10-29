@@ -26,6 +26,7 @@ namespace KulturPRO.Views
 
             //używacie metody AddNewItem, by stworzyć nowy View dla swojego ViewModelu listy po prawej stronie,
             AddNewItem(new ViewModels.FirstViewModel());
+            AddNewItem(new ViewModels.AdminViewModel());
         }
 
         private void brTop_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
