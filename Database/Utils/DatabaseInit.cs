@@ -38,7 +38,7 @@ namespace Database.Utils
                 }
             });
 
-            context.SaveChanges();
+            context.SaveChanges(1);
         }
     }
 }

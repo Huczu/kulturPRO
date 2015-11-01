@@ -23,6 +23,8 @@ namespace Database
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
+            modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
+
             var initializer = new DatabaseInit(modelBuilder);
             System.Data.Entity.Database.SetInitializer(initializer);
         }
