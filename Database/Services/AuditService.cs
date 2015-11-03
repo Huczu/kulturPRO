@@ -20,5 +20,15 @@ namespace Database.Services
                 return logs;
             }
         }
+
+        public AuditLog GetAuditLogForId(long id)
+        {
+            using (var context = new DatabaseContext())
+            {
+                var auditLog = context.AuditLog.Include(a => a.LogDetails).FirstOrDefault(a => a.AuditLogId.Equals(id));
+
+                return auditLog;
+            }
+        }
     }
 }

@@ -106,12 +106,15 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Utillities\AuditLogConverters\ClassTypeConverter.cs" />
+    <Compile Include="Utillities\AuditLogConverters\EventTypeConverter.cs" />
     <Compile Include="Utillities\BindingExtentions.cs" />
     <Compile Include="Utillities\BrushWrapper.cs" />
     <Compile Include="Utillities\Converters.cs" />
     <Compile Include="Utillities\MapperConfig.cs" />
     <Compile Include="Utillities\WindowAccessMethods.cs" />
     <Compile Include="ViewModels\AdminViewModel.cs" />
+    <Compile Include="ViewModels\AuditDetailsViewModel.cs" />
     <Compile Include="ViewModels\AuditListViewModel.cs" />
     <Compile Include="ViewModels\FristViewModel.cs" />
     <Compile Include="ViewModels\FunctionalList.cs" />
@@ -120,6 +123,9 @@
     <Compile Include="ViewModels\UserViewModel.cs" />
     <Compile Include="Views\AdminView.xaml.cs">
       <DependentUpon>AdminView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Audit\AuditDetails.xaml.cs">
+      <DependentUpon>AuditDetails.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Audit\AuditListView.xaml.cs">
       <DependentUpon>AuditListView.xaml</DependentUpon>
@@ -131,6 +137,10 @@
       <DependentUpon>SettingsControl.xaml</DependentUpon>
     </Compile>
     <Page Include="Views\AdminView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Audit\AuditDetails.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

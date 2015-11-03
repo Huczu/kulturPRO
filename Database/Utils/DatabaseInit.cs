@@ -20,15 +20,18 @@ namespace Database.Utils
 
         protected override void Seed(DatabaseContext context)
         {
+            var user = new User
+            {
+                Login = "test",
+                Password = "123",
+                FirstName = "test",
+                Surname = "testing"
+            };
+
+            context.SaveChanges();
+
             context.Users.AddRange(new List<User>
             {
-                new User
-                {
-                    Login = "test",
-                    Password = "123",
-                    FirstName = "test",
-                    Surname = "testing"
-                },
                 new User
                 {
                     Login = "testoooooo",
@@ -38,7 +41,7 @@ namespace Database.Utils
                 }
             });
 
-            context.SaveChanges(1);
+            context.SaveChanges(user.FullName);
         }
     }
 }

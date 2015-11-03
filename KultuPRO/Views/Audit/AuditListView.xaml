@@ -4,18 +4,40 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:KulturPRO.ViewModels"
+             xmlns:converters="clr-namespace:KulturPRO.Utillities.AuditLogConverters"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
     
+    <UserControl.Resources>
+        <converters:ClassTypeConverter x:Key="classTypeConverter" />
+        <converters:EventTypeConverter x:Key="eventTypeConverter" />
+    </UserControl.Resources>
+        
     <UserControl.DataContext>
         <local:AuditListViewModel />
     </UserControl.DataContext>
     
     <Grid x:Name="mainGrid">
         <Grid>
-            <DataGrid x:Name="auditLogsGrid" AutoGenerateColumns="false" ItemsSource="{Binding AuditLogs}">
+            <DataGrid x:Name="auditLogsGrid" 
+                      AutoGenerateColumns="false" 
+                      ItemsSource="{Binding AuditLogs}" 
+                      CanUserAddRows="False" 
+                      CanUserDeleteRows="False" 
+                      CanUserSortColumns="False" 
+                      CanUserReorderColumns="false" 
+                      IsReadOnly="True" 
+                      ColumnWidth="*" 
+                      HorizontalAlignment="Stretch" 
+                      HorizontalContentAlignment="Stretch"
+                      SelectedItem="{Binding SelectedAuditLog}"
+                      MouseDoubleClick="Row_MouseDoubleClick">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Data" Binding="{Binding EventDateUTC}" />
+                    <DataGridTextColumn Header="Użytkownik" Binding="{Binding UserName}" />
+                    <DataGridTextColumn Header="Typ zdarzenia" Binding="{Binding EventType, Converter={StaticResource eventTypeConverter}}" />
+                    <DataGridTextColumn Header="Cel zdarzenia" Binding="{Binding TypeFullName, Converter={StaticResource classTypeConverter}}" />
+                    <DataGridTextColumn Header="Numer zmienionego rekordu" Binding="{Binding RecordId}" />
                 </DataGrid.Columns>
             </DataGrid>
         </Grid>

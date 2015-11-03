@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using TrackerEnabledDbContext.Common.Models;
 
 namespace KulturPRO.Views.Audit
 {
@@ -23,6 +24,19 @@ namespace KulturPRO.Views.Audit
         public AuditListView()
         {
             InitializeComponent();
+        }
+
+        private void Row_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            DataGridRow row = ItemsControl.ContainerFromElement((DataGrid)sender, e.OriginalSource as DependencyObject) as DataGridRow;
+
+            if (row != null)
+            {
+                var item = row.Item as AuditLog;
+
+                AuditDetails auditDetails = new AuditDetails(item.AuditLogId);
+                auditDetails.Show();
+            }
         }
     }
 }
