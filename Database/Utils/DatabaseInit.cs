@@ -38,6 +38,13 @@ namespace Database.Utils
                     Password = "123",
                     FirstName = "testoooooo",
                     Surname = "testing"
+                },
+                new User
+                {
+                    Login = "testowy",
+                    Password = "123",
+                    FirstName = "Krystian",
+                    Surname = "Kuryło"
                 }
             });
 

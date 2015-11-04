@@ -6,6 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 using Database.Services;
+using KulturPRO.Utillities;
 
 namespace KulturPRO
 {
@@ -16,8 +17,7 @@ namespace KulturPRO
     {
         protected override void OnStartup(StartupEventArgs e)
         {
-            UserService service = new UserService();
-            var user = service.GetUserById(1).Result;
+            MapperConfig.Config();
 
             base.OnStartup(e);
         }

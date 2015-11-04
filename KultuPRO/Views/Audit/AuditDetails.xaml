@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:local="clr-namespace:KulturPRO.ViewModels"
         xmlns:converters="clr-namespace:KulturPRO.Utillities.AuditLogConverters"
-        Title="AuditDetails" Height="300" Width="300"
+        Title="AuditDetails" Height="480" Width="640"
         ResizeMode="NoResize">
 
     <Window.Resources>
@@ -11,11 +11,39 @@
         <converters:EventTypeConverter x:Key="eventTypeConverter" />
     </Window.Resources>
 
-    <Grid>
-        <TextBlock x:Name="ChangedBlock" Text="Zmiana w:" Margin="0,0,198,245" />
-        <TextBlock x:Name="TypeFullName" Text="{Binding AuditLog.TypeFullName, Converter={StaticResource classTypeConverter}}" Margin="99,0,82,245" />
-        
-        <TextBlock x:Name="DateBlock" Text="Data zmiany:" Margin="0,30,198,212" />
-        <TextBlock x:Name="EventDateUTC" Text="{Binding AuditLog.EventDateUTC}" Margin="99,30,82,212" />
+    <Grid Margin="0,10,0,0">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="94*"/>
+            <ColumnDefinition Width="53*"/>
+        </Grid.ColumnDefinitions>
+        <TextBlock x:Name="ChangedBlock" Text="Zmiana w:" Margin="10,0,110,417" />
+        <TextBlock x:Name="TypeFullName" Text="{Binding AuditLog.TypeFullName, Converter={StaticResource classTypeConverter}}" Margin="300,0,10,417" Grid.ColumnSpan="2" />
+
+        <TextBlock x:Name="IdBlock" Text="Id rekordu:" Margin="10,30,110,387" />
+        <TextBlock x:Name="RecordId" Text="{Binding AuditLog.RecordId}" Margin="300,30,10,387" Grid.ColumnSpan="2" />
+
+        <TextBlock x:Name="DateBlock" Text="Data zmiany:" Margin="10,60,110,357" />
+        <TextBlock x:Name="EventDateUTC" Text="{Binding AuditLog.EventDateUTC}" Margin="300,60,10,357" Grid.ColumnSpan="2" />
+
+        <TextBlock x:Name="UserBlock" Text="Zmiana dokonana przez:" Margin="10,90,110,324" />
+        <TextBlock x:Name="User" Text="{Binding AuditLog.UserName}" Margin="300,90,10,324" RenderTransformOrigin="0.788,0.533" Grid.ColumnSpan="2" />
+
+        <DataGrid x:Name="changesTable" 
+                  ItemsSource="{Binding AuditDetails}" 
+                  AutoGenerateColumns="False" 
+                  Margin="10,123,10,10" 
+                  Width="Auto" 
+                  Grid.ColumnSpan="2"
+                  CanUserAddRows="False" 
+                  CanUserDeleteRows="False" 
+                  CanUserSortColumns="False" 
+                  CanUserReorderColumns="false" 
+                  IsReadOnly="True" >
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Nazwa pola" Binding="{Binding PropertyName}" Width="2*" />
+                <DataGridTextColumn Header="Stara wartość" Binding="{Binding OriginalValue}" Width="4*" />
+                <DataGridTextColumn Header="Nowa wartość" Binding="{Binding NewValue}" Width="4*" />
+            </DataGrid.Columns>
+        </DataGrid>
     </Grid>
 </Window>

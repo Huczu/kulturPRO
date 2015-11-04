@@ -14,19 +14,24 @@ namespace Database.Models
     public class User
     {
         [Key]
+        [Description("Id")]
         public long Id { get; set; }
 
         [Required]
         [Index(IsUnique = true)]
+        [Description("Login")]
         public string Login { get; set; }
 
         [Required]
+        [Description("Hasło")]
         public string Password { get; set; }
 
         [Required]
+        [Description("Imię")]
         public string FirstName { get; set; }
 
         [Required]
+        [Description("Nazwisko")]
         public string Surname { get; set; }
 
         public string FullName
