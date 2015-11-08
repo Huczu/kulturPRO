@@ -28,25 +28,38 @@ namespace Database.Utils
                 Surname = "testing"
             };
 
-            context.SaveChanges();
+            context.Users.Add(user);
+            context.SaveChanges(user.FullName);
+
+            //uncomment if you want to test auditing paging mechanism
+            //for (int i = 0; i < 2000; i++ )
+            //{
+            //    context.Users.Add(new User
+            //        {
+            //            Login = "test" + i.ToString(),
+            //            Password = "123",
+            //            FirstName = "test" + i.ToString(),
+            //            Surname = "testing" + i.ToString()
+            //        });
+            //}
 
             context.Users.AddRange(new List<User>
-            {
-                new User
                 {
-                    Login = "testoooooo",
-                    Password = "123",
-                    FirstName = "testoooooo",
-                    Surname = "testing"
-                },
-                new User
-                {
-                    Login = "testowy",
-                    Password = "123",
-                    FirstName = "Krystian",
-                    Surname = "Kuryło"
-                }
-            });
+                    new User
+                    {
+                        Login = "test1",
+                        Password = "123",
+                        FirstName = "test1",
+                        Surname = "testing1"
+                    },
+                    new User
+                    {
+                        Login = "test2",
+                        Password = "123",
+                        FirstName = "test3",
+                        Surname = "testing4"
+                    },
+                });
 
             context.SaveChanges(user.FullName);
         }

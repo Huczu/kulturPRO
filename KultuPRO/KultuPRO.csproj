@@ -131,6 +131,9 @@
     <Compile Include="Views\Audit\AuditListView.xaml.cs">
       <DependentUpon>AuditListView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Common\GridPaging.xaml.cs">
+      <DependentUpon>GridPaging.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\ExampleView.xaml.cs">
       <DependentUpon>ExampleView.xaml</DependentUpon>
     </Compile>
@@ -148,6 +151,10 @@
     <Page Include="Views\Audit\AuditListView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Common\GridPaging.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\ExampleView.xaml">
       <SubType>Designer</SubType>

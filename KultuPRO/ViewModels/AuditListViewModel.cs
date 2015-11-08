@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Markup;
+using System.Windows.Input;
 using Database.Services;
 using TrackerEnabledDbContext.Common.Models;
 
@@ -19,31 +20,29 @@ namespace KulturPRO.ViewModels
 
         private List<AuditLog> _auditLogs;
 
-        private int _limit;
-        public int Limit
+        private int _pageSize;
+        public int PageSize 
         {
-            get {return _limit;}
+            get { return _pageSize; }
             set
             {
-                _limit = value;
-                OnPropertyChanged("Limit");
+                _pageSize = value;
+                UpdateAuditTable();
             }
         }
 
-        private int _offset;
-        public int Offset
-        {
-            get { return _offset; }
-            set
-            {
-                _offset = value;
-                OnPropertyChanged("Offset");
-            }
-        }
+        public int PageIndex { get; set; }
+
+        public int Count { get; set; }
 
         public List<AuditLog> AuditLogs
         {
             get { return _auditLogs; }
+            set
+            {
+                _auditLogs = value;
+                OnPropertyChanged("AuditLogs");
+            }
         }
 
         public AuditListViewModel()
@@ -51,12 +50,11 @@ namespace KulturPRO.ViewModels
             //init service
             _auditService = new AuditService();
 
-            //init limit and offset
-            Offset = 0;
-            Limit = 50;
+            Count = _auditService.GetTotalLogCount();
+            PageIndex = 1;
+            PageSize = 50;
 
-            _auditLogs = new List<AuditLog>(_auditService.GetLogsPagination(_limit, _offset));
-            OnPropertyChanged("AuditLogs");
+            ChangedIndexCommand = new RelayCommand(r => UpdateAuditTable());
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -67,6 +65,14 @@ namespace KulturPRO.ViewModels
             {
                 PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
             }
+        }
+
+        public ICommand ChangedIndexCommand { get; set; }
+
+        public void UpdateAuditTable()
+        {
+            Count = _auditService.GetTotalLogCount();
+            AuditLogs = new List<AuditLog>(_auditService.GetLogsPagination(PageSize, PageIndex));
         }
     }
 }

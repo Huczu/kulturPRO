@@ -3,7 +3,8 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:local="clr-namespace:KulturPRO.ViewModels"
         xmlns:converters="clr-namespace:KulturPRO.Utillities.AuditLogConverters"
-        Title="AuditDetails" Height="480" Width="640"
+        xmlns:common="clr-namespace:KulturPRO.Views.Common"
+        Title="AuditDetails" Height="640" Width="640"
         ResizeMode="NoResize">
 
     <Window.Resources>
@@ -31,14 +32,14 @@
         <DataGrid x:Name="changesTable" 
                   ItemsSource="{Binding AuditDetails}" 
                   AutoGenerateColumns="False" 
-                  Margin="10,123,10,10" 
+                  Margin="10,123,10,0" 
                   Width="Auto" 
                   Grid.ColumnSpan="2"
                   CanUserAddRows="False" 
                   CanUserDeleteRows="False" 
                   CanUserSortColumns="False" 
                   CanUserReorderColumns="false" 
-                  IsReadOnly="True" >
+                  IsReadOnly="True" Height="424" VerticalAlignment="Top" >
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Nazwa pola" Binding="{Binding PropertyName}" Width="2*" />
                 <DataGridTextColumn Header="Stara wartość" Binding="{Binding OriginalValue}" Width="4*" />

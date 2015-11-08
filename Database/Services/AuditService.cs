@@ -11,11 +11,11 @@ namespace Database.Services
 {
     public class AuditService
     {
-        public ICollection<AuditLog> GetLogsPagination(int limit, int offset)
+        public ICollection<AuditLog> GetLogsPagination(int size, int index)
         {
             using (var context = new DatabaseContext())
             {
-                var logs = context.AuditLog.OrderBy(a => a.EventDateUTC).Skip(offset).Take(limit).ToList();
+                var logs = context.AuditLog.OrderBy(a => a.EventDateUTC).Skip(size*(index - 1)).Take(size).ToList();
 
                 return logs;
             }
@@ -28,6 +28,14 @@ namespace Database.Services
                 var auditLog = context.AuditLog.Include(a => a.LogDetails).FirstOrDefault(a => a.AuditLogId.Equals(id));
 
                 return auditLog;
+            }
+        }
+
+        public int GetTotalLogCount()
+        {
+            using (var context = new DatabaseContext())
+            {
+                return context.AuditLog.Count();
             }
         }
     }
