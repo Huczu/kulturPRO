@@ -30,15 +30,14 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
             <Label Content="1" Grid.Column="2" HorizontalAlignment="Center" Margin="1,1,0,0" 
-                   Name="lPagina" VerticalAlignment="Center" FontSize="10"
+                   Name="lPage" VerticalAlignment="Center" FontSize="10"
                    ToolTip="Actual Page"
                    />
                 <Label Content="-" Grid.Column="3" HorizontalAlignment="Center" Margin="1,1,0,0" 
                    VerticalAlignment="Center" FontSize="10"
-                   ToolTip="Página Actual"
                    />
                 <Label Content="1" Grid.Column="4" HorizontalAlignment="Center" Margin="1,1,0,0" 
-                   Name="lTotalPagina" VerticalAlignment="Center" FontSize="10"
+                   Name="lTotalPages" VerticalAlignment="Center" FontSize="10"
                    ToolTip="Total Pages"
                    />
                 <Button Content="&gt;&gt;" Grid.Column="6" Height="23" HorizontalAlignment="Left" Margin="1,1,1,1" 
@@ -55,7 +54,7 @@
         <!-- Page Size Selector -->
             <StackPanel Grid.Column="2" Orientation="Horizontal" HorizontalAlignment="Right" 
                         VerticalAlignment="Center">
-                <ComboBox Width="50" FontSize="10" ToolTip="Rows x Page" Name="cbPageSize"
+                <ComboBox Width="50" FontSize="10" ToolTip="Page Size" Name="cbPageSize"
                           IsEditable="False" SelectionChanged="ComboBoxSelectionChanged"
                           VerticalAlignment="Center" Margin="0,0,5,0" Height="23">
                     <ComboBoxItem Content="50" IsSelected="False" />

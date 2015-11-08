@@ -31,8 +31,8 @@ namespace Database.Utils
             context.Users.Add(user);
             context.SaveChanges(user.FullName);
 
-            //uncomment if you want to test auditing paging mechanism
-            //for (int i = 0; i < 2000; i++ )
+            ////uncomment if you want to test auditing paging mechanism
+            //for (int i = 0; i < 2000; i++)
             //{
             //    context.Users.Add(new User
             //        {
