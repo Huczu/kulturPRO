@@ -11,31 +11,31 @@ namespace Database.Services
 {
     public class AuditService
     {
-        public ICollection<AuditLog> GetLogsPagination(int size, int index)
+        public async Task<ICollection<AuditLog>> GetLogsPagination(int size, int index)
         {
             using (var context = new DatabaseContext())
             {
-                var logs = context.AuditLog.OrderBy(a => a.EventDateUTC).Skip(size*(index - 1)).Take(size).ToList();
+                var logs = await context.AuditLog.OrderBy(a => a.EventDateUTC).Skip(size*(index - 1)).Take(size).ToListAsync();
 
                 return logs;
             }
         }
 
-        public AuditLog GetAuditLogForId(long id)
+        public async Task<AuditLog> GetAuditLogForId(long id)
         {
             using (var context = new DatabaseContext())
             {
-                var auditLog = context.AuditLog.Include(a => a.LogDetails).FirstOrDefault(a => a.AuditLogId.Equals(id));
+                var auditLog = await context.AuditLog.Include(a => a.LogDetails).FirstOrDefaultAsync(a => a.AuditLogId.Equals(id));
 
                 return auditLog;
             }
         }
 
-        public int GetTotalLogCount()
+        public async Task<int> GetTotalLogCount()
         {
             using (var context = new DatabaseContext())
             {
-                return context.AuditLog.Count();
+                return await context.AuditLog.CountAsync();
             }
         }
     }

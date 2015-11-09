@@ -50,9 +50,9 @@ namespace KulturPRO.ViewModels
             //init service
             _auditService = new AuditService();
 
-            Count = _auditService.GetTotalLogCount();
             PageIndex = 1;
             PageSize = 50;
+            UpdateAuditTable();
 
             ChangedIndexCommand = new RelayCommand(r => UpdateAuditTable());
         }
@@ -69,10 +69,10 @@ namespace KulturPRO.ViewModels
 
         public ICommand ChangedIndexCommand { get; set; }
 
-        public void UpdateAuditTable()
+        public async void UpdateAuditTable()
         {
-            Count = _auditService.GetTotalLogCount();
-            AuditLogs = new List<AuditLog>(_auditService.GetLogsPagination(PageSize, PageIndex));
+            Count = await _auditService.GetTotalLogCount();
+            AuditLogs = new List<AuditLog>(await _auditService.GetLogsPagination(PageSize, PageIndex));
         }
     }
 }

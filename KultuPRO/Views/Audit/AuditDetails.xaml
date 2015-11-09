@@ -14,32 +14,39 @@
 
     <Grid Margin="0,10,0,0">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="94*"/>
-            <ColumnDefinition Width="53*"/>
+            <ColumnDefinition Width="40*"/>
+            <ColumnDefinition Width="60*"/>
         </Grid.ColumnDefinitions>
-        <TextBlock x:Name="ChangedBlock" Text="Zmiana w:" Margin="10,0,110,417" />
-        <TextBlock x:Name="TypeFullName" Text="{Binding AuditLog.TypeFullName, Converter={StaticResource classTypeConverter}}" Margin="300,0,10,417" Grid.ColumnSpan="2" />
+        <Grid.RowDefinitions>
+            <RowDefinition Height="5*" />
+            <RowDefinition Height="5*" />
+            <RowDefinition Height="5*" />
+            <RowDefinition Height="5*" />
+            <RowDefinition Height="60*" />
+        </Grid.RowDefinitions>
+        <TextBlock x:Name="ChangedBlock" Text="Zmiana w:" Grid.Column="0" Grid.Row="0" />
+        <TextBlock x:Name="TypeFullName" Text="{Binding AuditLog.TypeFullName, Converter={StaticResource classTypeConverter}}" Grid.Column="1" Grid.Row="0" />
 
-        <TextBlock x:Name="IdBlock" Text="Id rekordu:" Margin="10,30,110,387" />
-        <TextBlock x:Name="RecordId" Text="{Binding AuditLog.RecordId}" Margin="300,30,10,387" Grid.ColumnSpan="2" />
+        <TextBlock x:Name="IdBlock" Text="Id rekordu:" Grid.Column="0" Grid.Row="1"/>
+        <TextBlock x:Name="RecordId" Text="{Binding AuditLog.RecordId}" Grid.Column="1" Grid.Row="1"/>
 
-        <TextBlock x:Name="DateBlock" Text="Data zmiany:" Margin="10,60,110,357" />
-        <TextBlock x:Name="EventDateUTC" Text="{Binding AuditLog.EventDateUTC}" Margin="300,60,10,357" Grid.ColumnSpan="2" />
+        <TextBlock x:Name="DateBlock" Text="Data zmiany:" Grid.Column="0" Grid.Row="2"/>
+        <TextBlock x:Name="EventDateUTC" Text="{Binding AuditLog.EventDateUTC}" Grid.Column="1" Grid.Row="2"/>
 
-        <TextBlock x:Name="UserBlock" Text="Zmiana dokonana przez:" Margin="10,90,110,324" />
-        <TextBlock x:Name="User" Text="{Binding AuditLog.UserName}" Margin="300,90,10,324" RenderTransformOrigin="0.788,0.533" Grid.ColumnSpan="2" />
+        <TextBlock x:Name="UserBlock" Text="Zmiana dokonana przez:" Grid.Column="0" Grid.Row="3"/>
+        <TextBlock x:Name="User" Text="{Binding AuditLog.UserName}" Grid.Column="1" Grid.Row="3"/>
 
         <DataGrid x:Name="changesTable" 
                   ItemsSource="{Binding AuditDetails}" 
                   AutoGenerateColumns="False" 
-                  Margin="10,123,10,0" 
                   Width="Auto" 
                   Grid.ColumnSpan="2"
+                  Grid.Row="4"
                   CanUserAddRows="False" 
                   CanUserDeleteRows="False" 
                   CanUserSortColumns="False" 
                   CanUserReorderColumns="false" 
-                  IsReadOnly="True" Height="424" VerticalAlignment="Top" >
+                  IsReadOnly="True" Height="Auto" VerticalAlignment="Top" >
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Nazwa pola" Binding="{Binding PropertyName}" Width="2*" />
                 <DataGridTextColumn Header="Stara wartość" Binding="{Binding OriginalValue}" Width="4*" />

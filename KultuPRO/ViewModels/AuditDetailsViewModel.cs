@@ -37,8 +37,13 @@ namespace KulturPRO.ViewModels
         {
             _auditService = new AuditService();
 
-            _auditLog = _auditService.GetAuditLogForId(_id);
+            SetAuditLog(_id);
             _auditDetails = Mapper.Map<List<AuditDetails>>(_auditLog.LogDetails);
+        }
+
+        private async void SetAuditLog(long _id)
+        {
+            _auditLog = await _auditService.GetAuditLogForId(_id);
         }
     }
 }

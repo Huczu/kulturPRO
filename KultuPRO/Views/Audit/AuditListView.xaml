@@ -22,7 +22,7 @@
             <RowDefinition Height="*" />
             <RowDefinition Height="35" />
         </Grid.RowDefinitions>
-        <DataGrid x:Name="auditLogsGrid"
+        <DataGrid     x:Name="auditLogsGrid"
                       AutoGenerateColumns="false" 
                       ItemsSource="{Binding AuditLogs}" 
                       CanUserAddRows="False" 
@@ -34,7 +34,8 @@
                       HorizontalAlignment="Stretch" 
                       HorizontalContentAlignment="Stretch"
                       SelectedItem="{Binding SelectedAuditLog}"
-                      MouseDoubleClick="Row_MouseDoubleClick" Margin="0,10">
+                      MouseDoubleClick="Row_MouseDoubleClick"
+                      Grid.Row="0">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Data" Binding="{Binding EventDateUTC}" />
                 <DataGridTextColumn Header="Użytkownik" Binding="{Binding UserName}" />
@@ -44,9 +45,7 @@
             </DataGrid.Columns>
         </DataGrid>
 
-        <common:GridPaging
-                           Height="30" 
-                           PageSize="{Binding PageSize, Mode=TwoWay}"
+        <common:GridPaging PageSize="{Binding PageSize, Mode=TwoWay}"
                            PageIndex="{Binding PageIndex, Mode=TwoWay}"
                            TotalCount="{Binding Count, Mode=TwoWay}"
                            ChangedIndexCommand="{Binding ChangedIndexCommand}" Grid.Row="1" />
