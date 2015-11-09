@@ -61,5 +61,12 @@ namespace KulturPRO.Views
             spFunctionality.Children.Add(expander);
 
         }
+
+        private void button1_Click(object sender, RoutedEventArgs e)
+        {
+            generating gen = new generating();
+            gen.Show();
+            
+        }
     }
 }

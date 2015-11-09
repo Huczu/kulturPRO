@@ -27,5 +27,12 @@ namespace Database
         }
 
         public DbSet<User> Users { get; set; }
+        public DbSet<SeatStatus> SStatus { get; set; }
+        public DbSet<Seat> Seats { get; set; }
+        public DbSet<PricePoint> PPoint { get; set; }
+        public DbSet<ShTime> STime { get; set; }
+        public DbSet<CinemaHall> CHall { get; set; }
+        public DbSet<Movie> Movie { get; set; }
+        public DbSet<SoldPlaces> SPlaces { get; set; }
     }
 }
