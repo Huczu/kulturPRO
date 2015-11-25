@@ -16,7 +16,7 @@
                 <SolidColorBrush Color="Brown" Opacity="0.1"/>
             </Button.Background>
         </Button>
-        <Border x:Name="brTop" VerticalAlignment="Top" BorderBrush="Black" BorderThickness="0,0,0,1" HorizontalAlignment="Stretch" MinHeight="30" MouseLeftButtonDown="brTop_MouseLeftButtonDown">
+        <Border x:Name="brTop" VerticalAlignment="Top" BorderBrush="Black" BorderThickness="0,0,0,1" HorizontalAlignment="Stretch" MinHeight="30" MouseLeftButtonDown="brTop_MouseLeftButtonDown" Margin="0,-35,0,0">
             <Border.Background>
                 <SolidColorBrush Color="{util:SettingBinding Path=TopBarBrush}"/>
             </Border.Background>

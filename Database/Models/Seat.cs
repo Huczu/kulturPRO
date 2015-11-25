@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.ComponentModel;
 
 namespace Database.Models
 {
@@ -12,18 +13,26 @@ namespace Database.Models
     {
         [Key]
         public long id { get; set; }
-        public long SeatStatusId { get; set; }
+        public Seat()
+            {
+                this.Status= "1";
+            }
         
-        [ForeignKey("SeatStatusId")]
-        public SeatStatus SeatStatus { get; set; }
+        public string Status { get; set; }
+        
+        
 
-        public long PricePointId { get; set; }
-        [ForeignKey("PricePointId")]
-        public PricePoint PricePoint { get; set; }
+        //public long PricePointId { get; set; }
+        //[ForeignKey("PricePointId")]
+        //public PricePoint PricePoint { get; set; }
         [Required]
         public int Row { get; set; }
         [Required]
         public int Column { get; set; }
+
+        public long CinemaHallId { get; set; }
+        [ForeignKey("CinemaHallId")]
+        public virtual CinemaHall CinemaHall { get; set; }
 
     }
 }

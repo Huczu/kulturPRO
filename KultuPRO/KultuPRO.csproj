@@ -116,6 +116,9 @@
     <Compile Include="Views\ExampleView.xaml.cs">
       <DependentUpon>ExampleView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\gen2.xaml.cs">
+      <DependentUpon>gen2.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\generating.xaml.cs">
       <DependentUpon>generating.xaml</DependentUpon>
     </Compile>
@@ -126,6 +129,10 @@
       <DependentUpon>SettingsControl.xaml</DependentUpon>
     </Compile>
     <Page Include="Views\ExampleView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\gen2.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

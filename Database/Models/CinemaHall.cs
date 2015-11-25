@@ -8,11 +8,13 @@ using System.Threading.Tasks;
 
 namespace Database.Models
 {
-    [TableAttribute("CinemaHall")]
+    //[TableAttribute("CinemaHall")]
     public class CinemaHall
     {
         [Key]
-        public int CinemaHallId { get; set; }
+        public long CinemaHallId { get; set; }
         public string CinemaHallName { get; set; }
+        public int x { get; set; }
+        public int y { get; set; }
     }
 }

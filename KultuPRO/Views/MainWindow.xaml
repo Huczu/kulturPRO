@@ -48,8 +48,8 @@
                     <Button x:Name="btFour" Style="{StaticResource ButtonStyle}"  Content="Drugi przycisk"/>
                 </StackPanel>
             </Expander>
-            <Button x:Name="button" Content="Button"/>
-            <Button x:Name="button1" Content="Button" Click="button1_Click"/>
+            <Button x:Name="button" Content="Generowanie Sali" Click="button_Click"/>
+            <Button x:Name="button1" Content="Sale" Click="button1_Click"/>
         </StackPanel>
     </Grid>
 </Window>

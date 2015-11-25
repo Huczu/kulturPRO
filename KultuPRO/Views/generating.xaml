@@ -5,20 +5,34 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:KulturPRO.Views"
         mc:Ignorable="d"
-        Title="generating" Height="300" Width="300">
+        Title="generating" Height="300" Width="647">
 
     <Grid x:Name="grd" AllowDrop="True" Margin="0">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="124*"/>
+            <ColumnDefinition Width="89*"/>
+        </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition/>
+            <RowDefinition Height="116*"/>
+            <RowDefinition Height="153*"/>
         </Grid.RowDefinitions>
-        <ComboBox x:Name="cbCinemaHall" Margin="0,60,10,0" VerticalAlignment="Top" HorizontalAlignment="Right" Width="120" SelectionChanged="cbCinemaHall_SelectionChanged" Height="22"/>
-        <ComboBox x:Name="cbShowTime" HorizontalAlignment="Right" Margin="0,120,10,0" VerticalAlignment="Top" Width="120" SelectionChanged="cbShowTime_SelectionChanged" Height="22"/>
-        <ComboBox x:Name="cbMovie" Margin="0,180,10,0" VerticalAlignment="Top" SelectionChanged="cbMovie_SelectionChanged" HorizontalAlignment="Right" Width="120" Height="22"/>
-        <Canvas x:Name="grdMain" Margin="0,65,154,119"/>
-        <Label Content="Sala" HorizontalAlignment="Right" Margin="0,34,10,381" Width="120" HorizontalContentAlignment="Center" RenderTransformOrigin="0.483,0.038"/>
-        <Label Content="Czas rozpoczęcia" HorizontalAlignment="Right" Margin="0,94,10,321" Width="120" HorizontalContentAlignment="Center"/>
-        <Label Content="Film" HorizontalAlignment="Right" Margin="0,154,10,261" Width="120" HorizontalContentAlignment="Center"/>
-        <Label x:Name="errLbl" Content="errLbl" Margin="10,0,23,10" VerticalAlignment="Bottom"/>
+        <StackPanel Margin="10" Grid.RowSpan="2"/>
+
+        <Canvas x:Name="grdMain" Margin="0,65,7,119" Grid.RowSpan="2"/>
+
+        <Button x:Name="Przycisk" HorizontalAlignment="Left" VerticalAlignment="Top" Width="115" Grid.Column="1" Margin="142,82,0,0" Height="26" Content="Reset widoku." Click="Przycisk_Click" Grid.Row="1"/>
+        <ComboBox x:Name="cbCinemaHall" SelectionChanged="cbCinemaHall_SelectionChanged" Grid.Column="1" Margin="148,10,4,83" Width="115" Height="26" >
+            <ComboBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+
+                        <TextBlock Text="{Binding CinemaHallName}" />
+                    </StackPanel>
+                </DataTemplate>
+            </ComboBox.ItemTemplate>
+
+        </ComboBox>
+        <CheckBox x:Name="checkBox" Content="Usuwanie miejsc." HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="1" Margin="142,128,0,0" Width="115" Checked="checkBox_Checked" Unchecked="CheckBox_Unchecked" Grid.Row="1" Height="15"/>
     </Grid>
 
 

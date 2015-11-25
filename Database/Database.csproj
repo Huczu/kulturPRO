@@ -69,14 +69,10 @@
   <ItemGroup>
     <Compile Include="DatabaseContext.cs" />
     <Compile Include="Models\CinemaHall.cs" />
-    <Compile Include="Models\Movie.cs" />
-    <Compile Include="Models\PricePoint.cs" />
     <Compile Include="Models\Seat.cs" />
-    <Compile Include="Models\SeatStatus.cs" />
-    <Compile Include="Models\ShowTime.cs" />
-    <Compile Include="Models\SoldPlaces.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\HallService.cs" />
     <Compile Include="Services\UserService.cs" />
     <Compile Include="Utils\DatabaseInit.cs" />
   </ItemGroup>

@@ -68,5 +68,11 @@ namespace KulturPRO.Views
             gen.Show();
             
         }
+        private void button_Click(object sender, RoutedEventArgs e)
+        {
+            Halls hall = new Halls();
+            hall.Show();
+
+        }
     }
 }

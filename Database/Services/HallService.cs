@@ -1,4 +1,5 @@
-﻿using System;
+﻿/*
+using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
@@ -8,15 +9,16 @@ using Database.Models;
 
 namespace Database.Services
 {
-    public class UserService
+    public class HallService
     {
-        public async Task<User> GetUserById(int id)
+        public async Task<CinemaHall> GetHallById(int id)
         {
             using (var context = new DatabaseContext())
             {
-                return await context.Users.FindAsync(id);
+                return await context.CHall.FindAsync(id);
             }
         }
-        
+
     }
 }
+*/
