@@ -12,9 +12,9 @@ namespace Database.Models
     public class CinemaHall
     {
         [Key]
-        public long CinemaHallId { get; set; }
-        public string CinemaHallName { get; set; }
-        public int x { get; set; }
-        public int y { get; set; }
+        public long Id { get; set; }
+        public string Name { get; set; }
+        public int MaxRows { get; set; }
+        public int MaxColumns { get; set; }
     }
 }

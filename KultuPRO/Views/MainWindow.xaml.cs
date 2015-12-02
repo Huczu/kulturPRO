@@ -26,6 +26,7 @@ namespace KulturPRO.Views
 
             //używacie metody AddNewItem, by stworzyć nowy View dla swojego ViewModelu listy po prawej stronie,
             AddNewItem(new ViewModels.FirstViewModel());
+            AddNewItem(new ViewModels.CinemHallsOnListViewModel());
         }
 
         private void brTop_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -59,19 +60,6 @@ namespace KulturPRO.Views
             expander.Content = stackpanel;
 
             spFunctionality.Children.Add(expander);
-
-        }
-
-        private void button1_Click(object sender, RoutedEventArgs e)
-        {
-            generating gen = new generating();
-            gen.Show();
-            
-        }
-        private void button_Click(object sender, RoutedEventArgs e)
-        {
-            Halls hall = new Halls();
-            hall.Show();
 
         }
     }

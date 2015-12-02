@@ -26,13 +26,13 @@ namespace KulturPRO.Views
     /// <summary>
     /// Interaction logic for generating.xaml
     /// </summary>
-    public partial class generating : Window
+    public partial class generating : UserControl
     {
         DatabaseContext db = new DatabaseContext();
         KulturPro.ViewModels.CinemaHallsRead CHallObj = new KulturPro.ViewModels.CinemaHallsRead();
         Button[,] bt;           // tablica miejsc
-        ObservableCollection<string[,]> h1;        //lista współrzędnych miejsc
-        ObservableCollection<string> f1;
+        ObservableCollection<SeatState[,]> h1;        //lista współrzędnych miejsc
+        ObservableCollection<SeatState> f1;
         int height = 30;        //parametry miejsc(elementów) w sali(button)
         int width = 30;
         
@@ -42,35 +42,32 @@ namespace KulturPRO.Views
             InitializeComponent();
             fill_combo();
             cbCinemaHall_SelectionChanged(null, null);
-            this.Height = 600;
-            this.Width = 1200;
-
         }
-       
+
         void fill_combo()
         {
-            DatabaseContext context = new DatabaseContext();
+            Database.Services.HallService hallService = new Database.Services.HallService();
 
-            var xd = (from c in context.CHall
-                      select c).ToList();
-
+            var xd = hallService.GetHallsOrderedById();
 
             cbCinemaHall.ItemsSource = xd.ToList();
-            cbCinemaHall.SelectedValuePath = "CinemaHallId";
+            cbCinemaHall.SelectedValuePath = "Id";
             cbCinemaHall.SelectedIndex = 0;
-
         }
         
         public void cbCinemaHall_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 
             grdMain.Children.Clear();
-
+            
 
             f1 = CHallObj.GetHallList();
             h1 = CHallObj.halls2();
+
+            grdMain.Columns = h1[cbCinemaHall.SelectedIndex].GetLength(1);
+            grdMain.Rows = h1[cbCinemaHall.SelectedIndex].GetLength(0);
+
             bt = new Button[h1[cbCinemaHall.SelectedIndex].GetLength(0), h1[cbCinemaHall.SelectedIndex].GetLength(1)];
-            double x = 0, y = 0;
             
             int numberToTagCounter = 0;
             for (int i = 0; i < bt.GetLength(0); i++)
@@ -79,14 +76,31 @@ namespace KulturPRO.Views
                 int columnCounter = 0;
                 for (int j = 0; j < bt.GetLength(1); j++)
                 {
-                    if (Convert.ToInt32(h1[cbCinemaHall.SelectedIndex][i, j]) == 0)
+                    if (h1[cbCinemaHall.SelectedIndex][i, j] == SeatState.NotExists)
                     {   //0=wolna przestrzeń
-                        y = i * height;
-                        if (j == 0)
-                            x = 0;
-                        x += (width + 1);
+                        //y = i * height;
+                        //if (j == 0)
+                        //    x = 0;
+                        //x += (width + 1);
+                        columnCounter++;
+                        numberToTagCounter++;
+                        bt[i, j] = new Button();
+                        bt[i, j].Height = height;
+                        bt[i, j].Width = width;
+                        bt[i, j].Content = columnCounter.ToString();
+                        bt[i, j].HorizontalAlignment = HorizontalAlignment.Stretch;
+                        bt[i, j].VerticalAlignment = VerticalAlignment.Stretch;
+                        bt[i, j].Tag = Tuple.Create(i, j, cbCinemaHall.SelectedIndex);
+                        bt[i, j].Background = Brushes.White;
+                        bt[i, j].Visibility = Visibility.Hidden;
+                        //y = i * height;
+                        //if (j == 0)
+                        //    x = 0;
+                        //x += (width + 1);
+                        bt[i, j].Margin = new Thickness(1);
+                        bt[i, j].Click += Button_Click;
                     }
-                    if (Convert.ToInt32(h1[cbCinemaHall.SelectedIndex][i, j]) == 1)
+                    if (h1[cbCinemaHall.SelectedIndex][i, j] == SeatState.Free)
                     {   //1=pierwsza grupa cenowa
                         columnCounter++;
                         numberToTagCounter++;
@@ -94,18 +108,21 @@ namespace KulturPRO.Views
                         bt[i, j].Height = height;
                         bt[i, j].Width = width;
                         bt[i, j].Content = columnCounter.ToString();
+                        bt[i, j].HorizontalAlignment = HorizontalAlignment.Stretch;
+                        bt[i, j].VerticalAlignment = VerticalAlignment.Stretch;
                         bt[i, j].Tag = Tuple.Create(i, j, cbCinemaHall.SelectedIndex);
                         bt[i, j].Background = Brushes.Green;
-                        y = i * height;
-                        if (j == 0)
-                            x = 0;
-                        x += (width + 1);
-                        bt[i, j].Margin = new Thickness(x, y, 0, 0);
+                        //y = i * height;
+                        //if (j == 0)
+                        //    x = 0;
+                        //x += (width + 1);
+                        //bt[i, j].Margin = new Thickness(x, y, 0, 0);
+                        bt[i, j].Margin = new Thickness(1);
                         bt[i, j].Click += Button_Click;
                         
                         
                     }
-                    if (Convert.ToInt32(h1[cbCinemaHall.SelectedIndex][i, j]) == 2)
+                    if (h1[cbCinemaHall.SelectedIndex][i, j] == SeatState.Taken)
                     {   //2=premiumqualityplaces
                         columnCounter++;
                         numberToTagCounter++;
@@ -115,12 +132,12 @@ namespace KulturPRO.Views
                         bt[i, j].Content = columnCounter.ToString();
                         bt[i, j].Tag = Tuple.Create(i, j, cbCinemaHall.SelectedIndex);
                         bt[i, j].Background = Brushes.Coral;
-                        y = i * height;
-                        if (j == 0)
-                            x = 0;
-                        x += (width + 1);
-                        bt[i, j].Margin = new Thickness(x, y, 0, 0);
-                        
+                        //y = i * height;
+                        //if (j == 0)
+                        //    x = 0;
+                        //x += (width + 1);
+                        //bt[i, j].Margin = new Thickness(x, y, 0, 0);
+                        bt[i, j].Margin = new Thickness(1);
                         bt[i, j].Click += Button_Click;
                         
 
@@ -134,7 +151,11 @@ namespace KulturPRO.Views
                 {
                     if (bt[i, j] == null)
                         continue;                   //jeśli jest zerowe pole
+                    
                     grdMain.Children.Add(bt[i, j]); //dodajemy miejsce
+
+                    Grid.SetRow(grdMain.Children[grdMain.Children.Count - 1],i);
+                    Grid.SetColumn(grdMain.Children[grdMain.Children.Count - 1], j);
                 }
             }
 
@@ -159,7 +180,7 @@ namespace KulturPRO.Views
                     using (var context = new DatabaseContext())
                     {
                         var status = context.Seats.Single(z => z.Row == rzad && z.Column == columna && z.CinemaHallId == chid);
-                        status.Status = "1";
+                        status.State = SeatState.Free;
 
                         context.SaveChanges();
                     }
@@ -172,19 +193,19 @@ namespace KulturPRO.Views
                     using (var context = new DatabaseContext())
                     {
                         var status = context.Seats.Single(z => z.Row == rzad && z.Column == columna && z.CinemaHallId == chid);
-                        status.Status = "2";
+                        status.State = SeatState.Taken;
 
                         context.SaveChanges();
                     }
                     (sender as Button).Background = Brushes.Coral;
                 }
             }
-            else if(!Globals.prawda)
+            else
             {
                 using (var context = new DatabaseContext())
                 {
                     var status = context.Seats.Single(z => z.Row == rzad && z.Column == columna && z.CinemaHallId == chid);
-                    status.Status = "0";
+                    status.State = SeatState.NotExists;
 
                     context.SaveChanges();
                 }

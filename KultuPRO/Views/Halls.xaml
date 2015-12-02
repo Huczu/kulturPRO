@@ -4,18 +4,32 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:KulturPRO.Views"
+        xmlns:util="clr-namespace:KulturPRO.Utillities"
         mc:Ignorable="d"
-        Title="Halls" Height="300" Width="300">
+        Title="Halls" Height="280" Width="300" WindowStyle="None" Style="{StaticResource WindowStyle}">
     <Grid>
-
-        <TextBox x:Name="NameofHall" HorizontalAlignment="Left" Height="20" Margin="10,50,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="191"/>
-        <Label x:Name="label_nameofhall" Content="Nazwa Nowej Sali" HorizontalAlignment="Left" Height="25" Margin="10,25,0,0" VerticalAlignment="Top" Width="211"/>
-        <Label x:Name="label_Row" Content="Ilość rzedów" HorizontalAlignment="Left" Height="25" Margin="10,75,0,0" VerticalAlignment="Top" Width="211"/>
-        <TextBox x:Name="Rows" HorizontalAlignment="Left" Height="20" Margin="10,105,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="191"/>
-        <Label x:Name="label_Columns" Content="Ilość miejsc w najdłuższym rzędzie" HorizontalAlignment="Left" Height="25" Margin="10,130,0,0" VerticalAlignment="Top" Width="211"/>
-        <TextBox x:Name="Columns" HorizontalAlignment="Left" Height="20" Margin="10,160,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="191"/>
-        <Button x:Name="Acceptbutton" Content="Dodaj" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="10,219,0,0" Click="button_Click"/>
-        <Button x:Name="CancelButton" Content="Cofnij" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="90,219,0,0" Click="CancelButton_Click"/>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Button x:Name="btExit" Grid.Column="1"  BorderThickness="1" BorderBrush="Black" Height="30" Width="30" HorizontalAlignment="Right" VerticalAlignment="Stretch" Padding="0" Content="x" FontSize="18" HorizontalContentAlignment="Center" VerticalContentAlignment="Top" Command="{StaticResource ExitCommand}" CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}}" Panel.ZIndex="10">
+            <Button.Background>
+                <SolidColorBrush Color="Brown" Opacity="0.1"/>
+            </Button.Background>
+        </Button>
+        <Border x:Name="brTop" Grid.ColumnSpan="2" BorderThickness="2" BorderBrush="Black" VerticalAlignment="Top" HorizontalAlignment="Stretch" MinHeight="30" MouseLeftButtonDown="brTop_MouseLeftButtonDown">
+            <Border.Background>
+                <SolidColorBrush Color="{util:SettingBinding Path=TopBarBrush}"/>
+            </Border.Background>
+        </Border>
+        <TextBox Grid.Row="1"  x:Name="tbNameofHall" HorizontalAlignment="Left" Height="20" Margin="10,50,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="191"/>
+        <Label x:Name="lbNameOfhall" Grid.Row="1"  Content="Nazwa Nowej Sali" HorizontalAlignment="Left" Height="25" Margin="10,25,0,0" VerticalAlignment="Top" Width="211"/>
+        <Label x:Name="lbRow" Grid.Row="1"  Content="Liczba miejsc w najdłuższym rzędzie" HorizontalAlignment="Left" Height="25" Margin="10,75,0,0" VerticalAlignment="Top" Width="211"/>
+        <TextBox x:Name="tbRows" Grid.Row="1"  HorizontalAlignment="Left" Height="20" Margin="10,105,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="191"/>
+        <Label x:Name="lbColumns" Grid.Row="1"  Content="Liczba rzędów" HorizontalAlignment="Left" Height="25" Margin="10,130,0,0" VerticalAlignment="Top" Width="211"/>
+        <TextBox x:Name="tbColumns" Grid.Row="1"  HorizontalAlignment="Left" Height="20" Margin="10,160,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="191"/>
+        <Button x:Name="btAccept" Grid.Row="1"  Content="Dodaj" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="10,219,0,0" Click="btAccept_Click"/>
+        <Button x:Name="btCancel" Grid.Row="1"  Content="Cofnij" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="90,219,0,0" Click="btCancel_Click"/>
         
     </Grid>
 </Window>

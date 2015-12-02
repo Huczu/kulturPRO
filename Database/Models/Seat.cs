@@ -9,22 +9,20 @@ using System.ComponentModel;
 
 namespace Database.Models
 {
+    public enum SeatState
+    {
+        NotExists = 0,
+        Free = 1,
+        Taken = 2
+    }
+
     public class Seat
     {
         [Key]
-        public long id { get; set; }
-        public Seat()
-            {
-                this.Status= "1";
-            }
-        
-        public string Status { get; set; }
-        
-        
+        public long Id { get; set; }
 
-        //public long PricePointId { get; set; }
-        //[ForeignKey("PricePointId")]
-        //public PricePoint PricePoint { get; set; }
+        public SeatState State { get; set; }
+
         [Required]
         public int Row { get; set; }
         [Required]

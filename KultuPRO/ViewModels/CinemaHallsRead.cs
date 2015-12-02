@@ -6,85 +6,69 @@ using System.Threading.Tasks;
 using System.IO;
 using Database;
 using System.Collections.ObjectModel;
+using Database.Models;
+using System.Windows;
 
 namespace KulturPro.ViewModels
 {
     public class CinemaHallsRead
     {
-        ObservableCollection<string[,]> HallMass = new ObservableCollection<string[,]>();
+        ObservableCollection<SeatState[,]> HallMass = new ObservableCollection<SeatState[,]>();
         public void CinemaHallsAdd()
         {
-            string[,] hall = new string[1, 1]; 
+            SeatState[,] hall = new SeatState[1, 1]; 
             HallMass.Add(hall);
         }
-        public ObservableCollection<string> GetHallList()
+        public ObservableCollection<SeatState> GetHallList()
         {
 
-            ObservableCollection<string> cinemaHall = new ObservableCollection<string>();
-            int cnt2 = 0;
-            using (var context = new DatabaseContext())
-            {
-                var xs = (from b in context.CHall
-                             
-                          orderby b.CinemaHallId
-                          select b).ToList();
-                  
+            ObservableCollection<SeatState> cinemaHall = new ObservableCollection<SeatState>();
 
-                foreach (var CinemaHallId in xs)
-                {
-                    
-                    cnt2++;
-                  CinemaHallsAdd();
-                }
+            Database.Services.HallService hallService = new Database.Services.HallService();
+
+
+            var Halls = hallService.GetHallsOrderedById();
+
+            foreach (var CinemaHall in Halls)
+            {
+                CinemaHallsAdd();
             }
+
             return cinemaHall;
         }
-        public ObservableCollection<string[,]> halls2()
+
+        public ObservableCollection<SeatState[,]> halls2()
         {
             int resolutionX = 0;    //Parametr Hall (X) Długość
             int resolutionY = 0;
-                   
-            using (var context = new DatabaseContext())
-            {
-                var xs = (from b in context.CHall
-                         
-                         orderby b.CinemaHallId
-                          select b).ToList();
+            Database.Services.SeatService seatService = new Database.Services.SeatService();
+            Database.Services.HallService hallService = new Database.Services.HallService();
+            var halls = hallService.GetHallsOrderedById();
            
-               
-
-
-                foreach (var CinemaHallId in xs)
+            foreach (var CinemaHall in halls)
+            {
+                resolutionX = CinemaHall.MaxRows;
+                resolutionY = CinemaHall.MaxColumns;
+                int kinoid = Convert.ToInt32(CinemaHall.Id);
+                int cnt = kinoid-1;
+                HallMass[cnt] = new SeatState[resolutionY, resolutionX];
+                if (HallMass[cnt].GetLength(0) == resolutionY && HallMass[cnt].GetLength(1) == resolutionX)
                 {
-                    resolutionX = CinemaHallId.x;
-                    resolutionY = CinemaHallId.y;
-                    int kinoid = Convert.ToInt32(CinemaHallId.CinemaHallId);
-                    int cnt = kinoid-1;
-                    HallMass[cnt] = new string[resolutionY, resolutionX];
-                    if (HallMass[cnt].GetLength(0) == resolutionY && HallMass[cnt].GetLength(1) == resolutionX)
+                    for (int j = 0; j < resolutionY; j++)            //subtract the seats in the hall
                     {
-                        for (int j = 0; j < resolutionY; j++)            //subtract the seats in the hall
+                        //We subtract the rows
+                        for (int k = 0; k < resolutionX; k++)
                         {
-                            //We subtract the rows
-                            for (int k = 0; k < resolutionX; k++)
-                            {
-                                var status = context.Seats.Single(a => a.CinemaHallId == kinoid && a.Row == k+1 && a.Column == j+1);
-                                string value = status.Status;
-                                HallMass[cnt][j, k] = value;   // move into an array
-                            }
+                            var status = seatService.GetSeatsByIdColumnAndRow(kinoid, j+1, k+1);
+                            SeatState value = status.State;
+                            HallMass[cnt][j, k] = value;   // move into an array
                         }
                     }
-                 }
-                        
-           }
-         return HallMass;
+                }
+            }
 
-          
-
-            
+            return HallMass;        
         }
-
-
 
     }
 }

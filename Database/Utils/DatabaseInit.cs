@@ -37,14 +37,14 @@ namespace Database.Utils
                     Surname = "testing"
                 }
             });
-            context.CHall.AddRange(new List<CinemaHall>
+            context.CinemaHalls.AddRange(new List<CinemaHall>
             { 
                 new CinemaHall
                 {
-                    CinemaHallId = 1,
-                    CinemaHallName = "sala1",
-                    x = 2,
-                    y = 2
+                    Id = 1,
+                    Name = "sala1",
+                    MaxRows = 2,
+                    MaxColumns = 2
                 }
             });
             
@@ -53,8 +53,8 @@ namespace Database.Utils
             {
                 new Seat
                 {
-                   Status="2",
-                   
+                   State = SeatState.Taken,
+
                    Row=1,
                    Column=1,
                    CinemaHallId=1
@@ -62,7 +62,7 @@ namespace Database.Utils
                 },
                 new Seat
                 {
-                   Status="1",
+                   State = SeatState.NotExists,
                    
                    Row=1,
                    Column=2,
@@ -71,7 +71,7 @@ namespace Database.Utils
                 },
                 new Seat
                 {
-                   Status="1",
+                   State = SeatState.Free,
                    
                    Row=2,
                    Column=1,
@@ -80,7 +80,7 @@ namespace Database.Utils
                 },
                 new Seat
                 {
-                   Status="2",
+                   State = SeatState.Taken,
                    
                    Row=2,
                    Column=2,
