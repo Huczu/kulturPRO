@@ -19,7 +19,7 @@ namespace KulturPRO.Views
     /// </summary>
     public partial class LoginWindow : Window
     {
-
+        
         double height = 600;
         double width = 600;
         public LoginWindow()

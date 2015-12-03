@@ -51,6 +51,9 @@ namespace KulturPRO.Utillities
 
         public void Execute(object parameter)
         {
+            object[] array = (object[])parameter;
+            string Login = (string)array[0];
+            string Password = (string)array[1];
 
             //TODO logging implementation
 
