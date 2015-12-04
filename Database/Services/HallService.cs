@@ -58,6 +58,5 @@ namespace Database.Services
                 return (from ch in context.CinemaHalls where ch.Name == Name select ch.Id).First();
             }
         }
-
     }
 }

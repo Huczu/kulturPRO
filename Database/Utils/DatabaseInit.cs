@@ -110,6 +110,8 @@ namespace Database.Utils
                    CinemaHallId=1
                 }
             });
+
+            context.SaveChanges(user.FullName);
         }
     }
 }

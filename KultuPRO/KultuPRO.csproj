@@ -97,6 +97,9 @@
     <Reference Include="System.Xaml">
       <RequiredTargetFramework>4.0</RequiredTargetFramework>
     </Reference>
+    <Reference Include="TrackerEnabledDbContext">
+      <HintPath>..\dlls\TrackerEnabledDbContext.dll</HintPath>
+    </Reference>
     <Reference Include="TrackerEnabledDbContext.Common, Version=3.1.0.0, Culture=neutral, PublicKeyToken=4f92af0b908c4a0a, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\dlls\TrackerEnabledDbContext.Common.dll</HintPath>
