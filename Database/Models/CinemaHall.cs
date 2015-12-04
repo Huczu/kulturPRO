@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 namespace Database.Models
 {
     [TrackChanges]
+    [Description("Sala")]
     public class CinemaHall
     {
         [Key]

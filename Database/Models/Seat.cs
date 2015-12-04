@@ -17,6 +17,7 @@ namespace Database.Models
     }
 
     [TrackChanges]
+    [Description("Miejsce")]
     public class Seat
     {
         [Key]
