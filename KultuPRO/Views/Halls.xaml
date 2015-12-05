@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:KulturPRO.Views"
         xmlns:util="clr-namespace:KulturPRO.Utillities"
         mc:Ignorable="d"
-        Title="Halls" Height="280" Width="300" WindowStyle="None" Style="{StaticResource WindowStyle}">
+        Title="Halls" Height="280" Width="300" WindowStyle="None" WindowStartupLocation="CenterScreen" Style="{StaticResource WindowStyle}">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="30"/>

@@ -20,13 +20,22 @@ namespace KulturPRO.Views
     /// </summary>
     public partial class MainWindow : Window
     {
+        protected override void OnClosed(EventArgs e)
+        {
+            base.OnClosed(e);
+
+            Application.Current.Shutdown();
+        }
+
+
         public MainWindow()
         {
             InitializeComponent();
 
             //używacie metody AddNewItem, by stworzyć nowy View dla swojego ViewModelu listy po prawej stronie,
-            AddNewItem(new ViewModels.FirstViewModel());
+
             AddNewItem(new ViewModels.CinemHallsOnListViewModel());
+            AddNewItem(new ViewModels.ShowEventsOnListViewModel());
         }
 
         private void brTop_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
