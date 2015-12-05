@@ -8,6 +8,9 @@ using System.Diagnostics;
 
 namespace KulturPRO.ViewModels
 {
+    /// <summary>
+    /// klasa usprawniająca łączenie metod z komendami do kontrolek
+    /// </summary>
     public class RelayCommand : ICommand
     {
         #region Fields

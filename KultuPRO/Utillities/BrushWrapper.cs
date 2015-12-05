@@ -8,6 +8,9 @@ using System.ComponentModel;
 
 namespace KulturPRO.Utillities
 {
+    /// <summary>
+    /// klasa koloru -  nazwa i kolor typu Brush
+    /// </summary>
     public class BrushWrapper
     {
         public string Name { get; set; }
@@ -15,6 +18,10 @@ namespace KulturPRO.Utillities
 
     }
 
+
+    /// <summary>
+    /// pozwala wyświetlić wszystkie dostepne kolory, zmienić kolor paska u góry i zmienić kolor tła okien
+    /// </summary>
     public class ColorViewModel : INotifyPropertyChanged
     {
         private readonly List<BrushWrapper> colors_;

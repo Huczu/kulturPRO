@@ -34,7 +34,7 @@
         <!-- Control below allows to change it's content, see settings example -->
         <Border BorderThickness="2,0,0,2" BorderBrush="Black" Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
         <ContentControl x:Name="ccChangeableContent" Content="{Binding Source={StaticResource WindowAccessMethods}, Path=MainContent}" Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="5" />
-        <StackPanel x:Name="spFunctionality" Margin="5,5,15,5" Grid.Column="1" Grid.Row="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+        <StackPanel x:Name="spFunctionality" Margin="10,5" Grid.Column="1" Grid.Row="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
             <!-- Expander is a control to group controls. I'll modify its appearance soon. -->
             <Expander x:Name="eExample" Header="Przykład 1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch">
                 <StackPanel  HorizontalAlignment="Stretch" VerticalAlignment="Stretch">

@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using SQLite.CodeFirst;
 using Database.Models;
-
+using System.Threading;
 
 namespace Database.Utils
 {
@@ -37,57 +37,36 @@ namespace Database.Utils
                     Surname = "testing"
                 }
             });
-            context.CinemaHalls.AddRange(new List<CinemaHall>
-            { 
-                new CinemaHall
-                {
-                    Id = 1,
-                    Name = "sala1",
-                    MaxRows = 2,
-                    MaxColumns = 2
-                }
-            });
-            
-            context.SaveChanges();
-            context.Seats.AddRange(new List<Seat>
+
+            context.Events.AddRange(new List<Event>
             {
-                new Seat
+                new Event
                 {
-                   State = SeatState.Taken,
-
-                   Row=1,
-                   Column=1,
-                   CinemaHallId=1
-
+                    Name = "Benny Hill",
+                    Date = DateTime.Parse("20.04.2015"),
+                    Time = new TimeSpan(12,15,0),
+                    ImagePath = "/Images/papa.jpg",
+                    Description = "Film komediowy"
                 },
-                new Seat
+                new Event
                 {
-                   State = SeatState.NotExists,
-                   
-                   Row=1,
-                   Column=2,
-                   CinemaHallId=1
-
+                    Name = "Królik Bugs - The Movie",
+                    Date = DateTime.Parse("20.04.2015"),
+                    Time = new TimeSpan(12,45,0),
+                    ImagePath = "/Images/urban.jpg",
+                    Description = "Film animowany dla młodszych"
                 },
-                new Seat
+                new Event
                 {
-                   State = SeatState.Free,
-                   
-                   Row=2,
-                   Column=1,
-                   CinemaHallId=1
-
-                },
-                new Seat
-                {
-                   State = SeatState.Taken,
-                   
-                   Row=2,
-                   Column=2,
-                   CinemaHallId=1
+                    Name = "Gwiezdne Wojny 7",
+                    Date = DateTime.Parse("20.04.2015"),
+                    Time = new TimeSpan(10,0,0),
+                    ImagePath = "/Images/vader.jpg",
+                    Description = "Najnowsza część sagi"
                 }
             });
-            context.SaveChanges();
+
+            context.SaveChanges();       
         }
     }
 }

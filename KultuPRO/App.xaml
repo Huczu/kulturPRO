@@ -5,7 +5,6 @@
              xmlns:sys="clr-namespace:System;assembly=mscorlib"
              xmlns:util="clr-namespace:KulturPRO.Utillities"
              xmlns:viewmodel="clr-namespace:KulturPRO.ViewModels"
-             xmlns:model="clr-namespace:KulturPRO.Model"
              StartupUri="Views/LoginWindow.xaml" ShutdownMode="OnExplicitShutdown">
     <Application.Resources>
         <Style TargetType="{x:Type Window}" x:Key="WindowStyle">
@@ -39,7 +38,6 @@
         <sys:String x:Key="Font7">7</sys:String>
 
         <!-- Properties-->
-        <model:User x:Key="User"/>
         <util:WindowAccessMethods x:Key="WindowAccessMethods"/>
         <util:ColorViewModel x:Key="ColorViewModel"/>
         
