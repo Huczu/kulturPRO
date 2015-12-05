@@ -8,9 +8,6 @@ using System.Windows;
 
 namespace KulturPRO.Utillities
 {
-    /// <summary>
-    /// komenda zamknięcia okna
-    /// </summary>
     class ExitCommand : ICommand
     {
         public event EventHandler CanExecuteChanged
@@ -37,9 +34,6 @@ namespace KulturPRO.Utillities
         }
     }
 
-    /// <summary>
-    /// komenda logowania
-    /// </summary>
     class LoginCommand : ICommand
     {
         public event EventHandler CanExecuteChanged
@@ -57,8 +51,11 @@ namespace KulturPRO.Utillities
 
         public void Execute(object parameter)
         {
+            object[] array = (object[])parameter;
+            string Login = (string)array[0];
+            string Password = (string)array[1];
 
-            //TODO: logging implementation
+            //TODO logging implementation
 
             if(!WindowAccessMethods.IsWindowExists<Views.MainWindow>())
             {
@@ -68,10 +65,6 @@ namespace KulturPRO.Utillities
         }
     }
 
-
-    /// <summary>
-    /// komenda wyświetlania ustawień
-    /// </summary>
     class ShowSettingsCommand : ICommand
     {
 

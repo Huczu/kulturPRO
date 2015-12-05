@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using SQLite.CodeFirst;
 using Database.Models;
-using System.Threading;
+
 
 namespace Database.Utils
 {
@@ -37,6 +37,57 @@ namespace Database.Utils
                     Surname = "testing"
                 }
             });
+            context.CinemaHalls.AddRange(new List<CinemaHall>
+            { 
+                new CinemaHall
+                {
+                    Id = 1,
+                    Name = "sala1",
+                    MaxRows = 2,
+                    MaxColumns = 2
+                }
+            });
+            
+            context.SaveChanges();
+            context.Seats.AddRange(new List<Seat>
+            {
+                new Seat
+                {
+                   State = SeatState.Taken,
+
+                   Row=1,
+                   Column=1,
+                   CinemaHallId=1
+
+                },
+                new Seat
+                {
+                   State = SeatState.NotExists,
+                   
+                   Row=1,
+                   Column=2,
+                   CinemaHallId=1
+
+                },
+                new Seat
+                {
+                   State = SeatState.Free,
+                   
+                   Row=2,
+                   Column=1,
+                   CinemaHallId=1
+
+                },
+                new Seat
+                {
+                   State = SeatState.Taken,
+                   
+                   Row=2,
+                   Column=2,
+                   CinemaHallId=1
+                }
+            });
+            context.SaveChanges();
 
             context.Events.AddRange(new List<Event>
             {
@@ -66,7 +117,6 @@ namespace Database.Utils
                 }
             });
 
-            context.SaveChanges();       
         }
     }
 }

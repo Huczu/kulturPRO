@@ -12,9 +12,6 @@ using System.Windows.Media.Imaging;
 
 namespace KulturPRO.Utillities
 {
-    /// <summary>
-    /// konwerter mnożenia rozmiaru fonta przez ustalony mnożnik
-    /// </summary>
     public class FontConverter : IMultiValueConverter
     {
         private static double mainWindowFontMultiplier = 1;
@@ -105,9 +102,21 @@ namespace KulturPRO.Utillities
         }
     }
 
-    /// <summary>
-    /// konwerter loginu i hasła
-    /// </summary>
+    public class DateToBackgroundConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+
+            return Brushes.Black;
+
+        }
+
+        public object ConvertBack(object value, Type targetTypes, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
+    }
+
     public class LoginAndPasswordConverter : IMultiValueConverter
     {
         public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
@@ -123,36 +132,6 @@ namespace KulturPRO.Utillities
         public object[] ConvertBack(object value, Type[] targetTypes, object parameter, CultureInfo culture)
         {
             throw new NotImplementedException();
-        }
-    }
-
-
-    /// <summary>
-    /// konwertuje tło dla konkretnej wartości daty
-    /// </summary>
-    public class DateToBackgroundConverter : IValueConverter
-    {
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            
-            return Brushes.Black;
-
-        }
-
-        public object ConvertBack(object value, Type targetTypes, object parameter, CultureInfo culture)
-        {
-            throw new NotImplementedException();
-        }
-    }
-
-    /// <summary>
-    /// konwertuje string na typ Brush (kolor)
-    /// </summary>
-    public class StringToBrushConverter
-    {
-        public static Brush Convert(string brushName)
-        {
-            return (Brush)TypeDescriptor.GetConverter(typeof(Brush)).ConvertFromString(brushName);
         }
     }
 
@@ -177,6 +156,13 @@ namespace KulturPRO.Utillities
         public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {
             throw new NotImplementedException();
+        }
+    }
+    public class StringToBrushConverter
+    {
+        public static Brush Convert(string brushName)
+        {
+            return (Brush)TypeDescriptor.GetConverter(typeof(Brush)).ConvertFromString(brushName);
         }
     }
 }

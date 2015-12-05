@@ -8,9 +8,6 @@ using System.Threading.Tasks;
 
 namespace Database.Models
 {
-    /// <summary>
-    /// model użytkownika
-    /// </summary>
     public class User
     {
         [Key]
@@ -37,4 +34,7 @@ namespace Database.Models
             }
         }
     }
+ 
+  
+  
 }

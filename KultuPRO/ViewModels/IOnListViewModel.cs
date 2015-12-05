@@ -8,10 +8,6 @@ using System.Windows.Input;
 
 namespace KulturPRO.ViewModels
 {
-    /// <summary>
-    /// interface to implement viewmodel for panel on the right
-    /// the best way to do this
-    /// </summary>
     public interface IOnListViewModel
     {
         ICommand SwitchViewCommand {get; set;}
