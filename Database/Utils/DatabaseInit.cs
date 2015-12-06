@@ -112,6 +112,34 @@ namespace Database.Utils
             });
 
             context.SaveChanges(user.FullName);
+            context.Events.AddRange(new List<Event>
+            {
+                new Event
+                {
+                    Name = "Benny Hill",
+                    Date = DateTime.Parse("20.04.2015"),
+                    Time = new TimeSpan(12,15,0),
+                    ImagePath = "/Images/papa.jpg",
+                    Description = "Film komediowy"
+                },
+                new Event
+                {
+                    Name = "Królik Bugs - The Movie",
+                    Date = DateTime.Parse("20.04.2015"),
+                    Time = new TimeSpan(12,45,0),
+                    ImagePath = "/Images/urban.jpg",
+                    Description = "Film animowany dla młodszych"
+                },
+                new Event
+                {
+                    Name = "Gwiezdne Wojny 7",
+                    Date = DateTime.Parse("20.04.2015"),
+                    Time = new TimeSpan(10,0,0),
+                    ImagePath = "/Images/vader.jpg",
+                    Description = "Najnowsza część sagi"
+                }
+            });
+
         }
     }
 }

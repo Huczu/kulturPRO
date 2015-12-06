@@ -31,6 +31,7 @@ namespace Database
 
         public DbSet<User> Users { get; set; }
         public DbSet<Seat> Seats { get; set; }
+        public DbSet<Event> Events { get; set; }
         public DbSet<CinemaHall> CinemaHalls { get; set; }
     }
 }
