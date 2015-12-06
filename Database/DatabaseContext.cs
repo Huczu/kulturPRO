@@ -8,10 +8,11 @@ using System.Threading.Tasks;
 using SQLite.CodeFirst;
 using Database.Models;
 using Database.Utils;
+using TrackerEnabledDbContext;
 
 namespace Database
 {
-    public class DatabaseContext : DbContext
+    public class DatabaseContext : TrackerContext
     {
         public DatabaseContext()
             : base("db")
@@ -29,13 +30,8 @@ namespace Database
         }
 
         public DbSet<User> Users { get; set; }
-        //public DbSet<SeatStatus> SStatus { get; set; }
         public DbSet<Seat> Seats { get; set; }
-        //public DbSet<PricePoint> PPoint { get; set; }
-        //public DbSet<ShTime> STime { get; set; }
         public DbSet<Event> Events { get; set; }
         public DbSet<CinemaHall> CinemaHalls { get; set; }
-        //public DbSet<Movie> Movie { get; set; }
-       // public DbSet<SoldPlaces> SPlaces { get; set; }
     }
 }

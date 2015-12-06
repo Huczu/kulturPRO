@@ -61,6 +61,10 @@
     <Reference Include="EntityFramework">
       <HintPath>packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
+    <Reference Include="EntityFramework.MappingAPI, Version=6.1.0.9, Culture=neutral, PublicKeyToken=7ee2e825d201459e, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.MappingAPI.6.1.0.9\lib\net45\EntityFramework.MappingAPI.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="EntityFramework.SqlServer">
       <HintPath>packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
@@ -93,6 +97,13 @@
     <Reference Include="System.Xaml">
       <RequiredTargetFramework>4.0</RequiredTargetFramework>
     </Reference>
+    <Reference Include="TrackerEnabledDbContext">
+      <HintPath>..\dlls\TrackerEnabledDbContext.dll</HintPath>
+    </Reference>
+    <Reference Include="TrackerEnabledDbContext.Common, Version=3.1.0.0, Culture=neutral, PublicKeyToken=4f92af0b908c4a0a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\dlls\TrackerEnabledDbContext.Common.dll</HintPath>
+    </Reference>
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
@@ -102,13 +113,19 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Models\AuditDetails.cs" />
+    <Compile Include="Utillities\AuditLogConverters\ClassTypeConverter.cs" />
+    <Compile Include="Utillities\AuditLogConverters\EventTypeConverter.cs" />
     <Compile Include="Utillities\BindingExtentions.cs" />
     <Compile Include="Utillities\BrushWrapper.cs" />
     <Compile Include="Utillities\Converters.cs" />
     <Compile Include="Utillities\MapperConfig.cs" />
     <Compile Include="Utillities\WindowAccessMethods.cs" />
+    <Compile Include="ViewModels\AdminViewModel.cs" />
+    <Compile Include="ViewModels\AuditDetailsViewModel.cs" />
     <Compile Include="ViewModels\CinemaHallsRead.cs" />
     <Compile Include="ViewModels\CinemHallsOnListViewModel.cs" />
+    <Compile Include="ViewModels\AuditListViewModel.cs" />
     <Compile Include="ViewModels\EventViewModel.cs" />
     <Compile Include="ViewModels\FunctionalList.cs" />
     <Compile Include="ViewModels\IOnListViewModel.cs" />
@@ -117,6 +134,18 @@
     <Compile Include="ViewModels\UserViewModel.cs" />
     <Compile Include="Views\AddEventView.xaml.cs" />
     <Compile Include="Views\EventAsListBoxItemView.xaml.cs" />
+    <Compile Include="Views\AdminView.xaml.cs">
+      <DependentUpon>AdminView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Audit\AuditDetails.xaml.cs">
+      <DependentUpon>AuditDetails.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Audit\AuditListView.xaml.cs">
+      <DependentUpon>AuditListView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Common\GridPaging.xaml.cs">
+      <DependentUpon>GridPaging.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\generating.xaml.cs">
       <DependentUpon>generating.xaml</DependentUpon>
     </Compile>
@@ -126,8 +155,23 @@
     <Compile Include="Views\SettingsControl.xaml.cs">
       <DependentUpon>SettingsControl.xaml</DependentUpon>
     </Compile>
+    <Page Include="Views\AdminView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Compile Include="Views\ShowEventsView.xaml.cs" />
     <Page Include="Views\AddEventView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Audit\AuditDetails.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Audit\AuditListView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Common\GridPaging.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

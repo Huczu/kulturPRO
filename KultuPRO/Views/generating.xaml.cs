@@ -77,11 +77,7 @@ namespace KulturPRO.Views
                 for (int j = 0; j < bt.GetLength(1); j++)
                 {
                     if (h1[cbCinemaHall.SelectedIndex][i, j] == SeatState.NotExists)
-                    {   //0=wolna przestrzeń
-                        //y = i * height;
-                        //if (j == 0)
-                        //    x = 0;
-                        //x += (width + 1);
+                    {
                         columnCounter++;
                         numberToTagCounter++;
                         bt[i, j] = new Button();
@@ -93,15 +89,11 @@ namespace KulturPRO.Views
                         bt[i, j].Tag = Tuple.Create(i, j, cbCinemaHall.SelectedIndex);
                         bt[i, j].Background = Brushes.White;
                         bt[i, j].Visibility = Visibility.Hidden;
-                        //y = i * height;
-                        //if (j == 0)
-                        //    x = 0;
-                        //x += (width + 1);
                         bt[i, j].Margin = new Thickness(1);
                         bt[i, j].Click += Button_Click;
                     }
                     if (h1[cbCinemaHall.SelectedIndex][i, j] == SeatState.Free)
-                    {   //1=pierwsza grupa cenowa
+                    {
                         columnCounter++;
                         numberToTagCounter++;
                         bt[i, j] = new Button();
@@ -112,18 +104,13 @@ namespace KulturPRO.Views
                         bt[i, j].VerticalAlignment = VerticalAlignment.Stretch;
                         bt[i, j].Tag = Tuple.Create(i, j, cbCinemaHall.SelectedIndex);
                         bt[i, j].Background = Brushes.Green;
-                        //y = i * height;
-                        //if (j == 0)
-                        //    x = 0;
-                        //x += (width + 1);
-                        //bt[i, j].Margin = new Thickness(x, y, 0, 0);
                         bt[i, j].Margin = new Thickness(1);
                         bt[i, j].Click += Button_Click;
                         
                         
                     }
                     if (h1[cbCinemaHall.SelectedIndex][i, j] == SeatState.Taken)
-                    {   //2=premiumqualityplaces
+                    {
                         columnCounter++;
                         numberToTagCounter++;
                         bt[i, j] = new Button();
@@ -132,11 +119,6 @@ namespace KulturPRO.Views
                         bt[i, j].Content = columnCounter.ToString();
                         bt[i, j].Tag = Tuple.Create(i, j, cbCinemaHall.SelectedIndex);
                         bt[i, j].Background = Brushes.Coral;
-                        //y = i * height;
-                        //if (j == 0)
-                        //    x = 0;
-                        //x += (width + 1);
-                        //bt[i, j].Margin = new Thickness(x, y, 0, 0);
                         bt[i, j].Margin = new Thickness(1);
                         bt[i, j].Click += Button_Click;
                         

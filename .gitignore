@@ -190,3 +190,4 @@ ModelManifest.xml
 #Include SQL.Interop.dll files cause fuck you that's why
 !Database/x86/SQLite.Interop.dll
 !Database/x64/SQLite.Interop.dll
+!dlls/*

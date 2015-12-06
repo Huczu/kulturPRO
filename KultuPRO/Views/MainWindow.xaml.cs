@@ -35,6 +35,7 @@ namespace KulturPRO.Views
             //używacie metody AddNewItem, by stworzyć nowy View dla swojego ViewModelu listy po prawej stronie,
 
             AddNewItem(new ViewModels.CinemHallsOnListViewModel());
+            AddNewItem(new ViewModels.AdminViewModel());
             AddNewItem(new ViewModels.ShowEventsOnListViewModel());
         }
 
