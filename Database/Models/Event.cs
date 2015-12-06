@@ -52,5 +52,10 @@ namespace Database.Models
         /// </summary>
         [Description("Opis")]
         public string Description { get; set; }
+
+        public long DefaultTicketId { get; set; }
+
+        [ForeignKey("DefaultTicketId")]
+        public Ticket DefaultTicket { get; set; }
     }
 }

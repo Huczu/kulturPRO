@@ -112,6 +112,14 @@ namespace Database.Utils
                 }
             });
 
+            context.Tickets.Add(new Ticket
+            {
+                TypeName = "Normalny",
+                Price = 20.0,
+                DiscountPercentage = 0.0,
+                IsDefaultEventPrice = true
+            });
+
             context.SaveChanges(user.FullName);
             context.Events.AddRange(new List<Event>
             {
@@ -121,7 +129,8 @@ namespace Database.Utils
                     Date = DateTime.ParseExact("20/04/2015", "dd/mm/yyyy", CultureInfo.InvariantCulture),
                     Time = new TimeSpan(12,15,0),
                     ImagePath = "/Images/papa.jpg",
-                    Description = "Film komediowy"
+                    Description = "Film komediowy",
+                    DefaultTicketId = 1
                 },
                 new Event
                 {
@@ -129,7 +138,8 @@ namespace Database.Utils
                     Date = DateTime.ParseExact("20/04/2015", "dd/mm/yyyy", CultureInfo.InvariantCulture),
                     Time = new TimeSpan(12,45,0),
                     ImagePath = "/Images/urban.jpg",
-                    Description = "Film animowany dla młodszych"
+                    Description = "Film animowany dla młodszych",
+                    DefaultTicketId = 1
                 },
                 new Event
                 {
@@ -137,9 +147,32 @@ namespace Database.Utils
                     Date = DateTime.ParseExact("20/04/2015", "dd/mm/yyyy", CultureInfo.InvariantCulture),
                     Time = new TimeSpan(10,0,0),
                     ImagePath = "/Images/vader.jpg",
-                    Description = "Najnowsza część sagi"
+                    Description = "Najnowsza część sagi",
+                    DefaultTicketId = 1
                 }
             });
+            context.SaveChanges(user.FullName);
+
+            context.Reservations.Add(new Reservation
+            {
+                EventId = 1,
+                SeatReservations = new List<SeatReservation>
+                {
+                    new SeatReservation
+                    {
+                        SeatId = 1,
+                        TicketId = 1,
+                        IsPaid = false
+                    },
+                    new SeatReservation
+                    {
+                        SeatId = 4,
+                        TicketId = 1,
+                        IsPaid = false
+                    }
+                }
+            });
+
             context.SaveChanges(user.FullName);
         }
     }

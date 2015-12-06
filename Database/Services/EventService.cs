@@ -24,7 +24,7 @@ namespace Database.Services
         /// </summary>
         /// <param name="id">id w bazie danych</param>
         /// <returns></returns>
-        public async Task<Event> GetEventById(int id)
+        public async Task<Event> GetEventById(long id)
         {
             log.Info("Użytkownik Pat pobrał wydarzenie przez id");
             using (var context = new DatabaseContext())

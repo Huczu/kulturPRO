@@ -39,6 +39,5 @@ namespace Database.Models
         public long CinemaHallId { get; set; }
         [ForeignKey("CinemaHallId")]
         public virtual CinemaHall CinemaHall { get; set; }
-
     }
 }
