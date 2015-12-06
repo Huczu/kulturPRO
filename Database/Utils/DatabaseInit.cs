@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using System.Globalization;
 using System.Text;
 using System.Threading.Tasks;
 using SQLite.CodeFirst;
@@ -117,7 +118,7 @@ namespace Database.Utils
                 new Event
                 {
                     Name = "Benny Hill",
-                    Date = DateTime.Parse("20.04.2015"),
+                    Date = DateTime.ParseExact("20/04/2015", "dd/mm/yyyy", CultureInfo.InvariantCulture),
                     Time = new TimeSpan(12,15,0),
                     ImagePath = "/Images/papa.jpg",
                     Description = "Film komediowy"
@@ -125,7 +126,7 @@ namespace Database.Utils
                 new Event
                 {
                     Name = "Królik Bugs - The Movie",
-                    Date = DateTime.Parse("20.04.2015"),
+                    Date = DateTime.ParseExact("20/04/2015", "dd/mm/yyyy", CultureInfo.InvariantCulture),
                     Time = new TimeSpan(12,45,0),
                     ImagePath = "/Images/urban.jpg",
                     Description = "Film animowany dla młodszych"
@@ -133,13 +134,13 @@ namespace Database.Utils
                 new Event
                 {
                     Name = "Gwiezdne Wojny 7",
-                    Date = DateTime.Parse("20.04.2015"),
+                    Date = DateTime.ParseExact("20/04/2015", "dd/mm/yyyy", CultureInfo.InvariantCulture),
                     Time = new TimeSpan(10,0,0),
                     ImagePath = "/Images/vader.jpg",
                     Description = "Najnowsza część sagi"
                 }
             });
-
+            context.SaveChanges(user.FullName);
         }
     }
 }
