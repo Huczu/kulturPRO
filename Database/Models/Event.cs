@@ -57,5 +57,13 @@ namespace Database.Models
 
         [ForeignKey("DefaultTicketId")]
         public Ticket DefaultTicket { get; set; }
+
+        public string NameWithDate
+        {
+            get
+            {
+                return Name + " " + Date.AddTicks(TimeSpanTicks);
+            }
+        }
     }
 }

@@ -91,6 +91,7 @@
     <Compile Include="Services\AuditService.cs" />
     <Compile Include="Services\EventService.cs" />
     <Compile Include="Services\HallService.cs" />
+    <Compile Include="Services\ReservationService.cs" />
     <Compile Include="Services\SeatService.cs" />
     <Compile Include="Services\UserService.cs" />
     <Compile Include="Utils\DatabaseInit.cs" />

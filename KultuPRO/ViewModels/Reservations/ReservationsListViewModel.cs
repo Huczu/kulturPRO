@@ -14,7 +14,7 @@ using Database.Models;
 
 namespace KulturPRO.ViewModels.Reservations
 {
-    public class ReservationsListViewModel : INotifyPropertyChanged
+    public class ReservationsListViewModel : IOnListViewModel
     {
         private readonly ReservationService reservationService = new ReservationService();
         private readonly EventService eventService = new EventService();
@@ -47,38 +47,65 @@ namespace KulturPRO.ViewModels.Reservations
             }
         }
 
-        private long _eventId;
-        public long EventId
+        private long _selectedEvent;
+        public long SelectedEvent
         {
             get
             {
-                return _eventId;
+                return _selectedEvent;
             }
             set
             {
-                _eventId = value;
+                _selectedEvent = value;
                 UpdateReservationsList(value);
             }
         }
 
         public ReservationsListViewModel()
         {
-            EventId = 1;
-            Events = eventService.GetEvents().Result;
+            Events = eventService.GetEventsAfterDate(DateTime.Today).Result.ToList();
+            SelectedEvent = 0;
             Reservations = reservationService.GetReservationsForEventId(1).Result.ToList();
+
+            //init Commands
+            SwitchViewCommand = new RelayCommand(r => SwitchView());
+
+            //init FunctionalList with sub-functionalities
+            FunctionalList = new FunctionalList("Rezerwacje", new List<Function>
+            {
+                new Function("Lista rezerwacji", SwitchViewCommand)
+            });
         }
 
         public ReservationsListViewModel(long eventId)
         {
-            EventId = eventId;
             Events.Add(eventService.GetEventById(eventId).Result);
+            SelectedEvent = 0;
             Reservations = reservationService.GetReservationsForEventId(eventId).Result.ToList();
+
+            //init Commands
+            SwitchViewCommand = new RelayCommand(r => SwitchView());
+
+            //init FunctionalList with sub-functionalities
+            FunctionalList = new FunctionalList("Rezerwacje", new List<Function>
+            {
+                new Function("Lista rezerwacji", SwitchViewCommand)
+            });
         }
 
         private async void UpdateReservationsList(long eventId)
         {
-            var newList = await reservationService.GetReservationsForEventId(eventId);
+            var newList = await reservationService.GetReservationsForEventId(_events.ElementAt(Convert.ToInt32(eventId)).Id);
             Reservations = newList.ToList();
+        }
+
+        public FunctionalList FunctionalList { get; set; }
+
+        public ICommand SwitchViewCommand { get; set; }
+
+        public void SwitchView()
+        {
+            Utillities.WindowAccessMethods.SwitchView(new Views.Reservations.ReservationsList());
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

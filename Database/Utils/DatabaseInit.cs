@@ -126,7 +126,7 @@ namespace Database.Utils
                 new Event
                 {
                     Name = "Benny Hill",
-                    Date = DateTime.ParseExact("20/04/2015", "dd/mm/yyyy", CultureInfo.InvariantCulture),
+                    Date = DateTime.Today.AddDays(1),
                     Time = new TimeSpan(12,15,0),
                     ImagePath = "/Images/papa.jpg",
                     Description = "Film komediowy",
@@ -135,7 +135,7 @@ namespace Database.Utils
                 new Event
                 {
                     Name = "Królik Bugs - The Movie",
-                    Date = DateTime.ParseExact("20/04/2015", "dd/mm/yyyy", CultureInfo.InvariantCulture),
+                    Date = DateTime.Today.AddDays(2),
                     Time = new TimeSpan(12,45,0),
                     ImagePath = "/Images/urban.jpg",
                     Description = "Film animowany dla młodszych",
@@ -144,7 +144,7 @@ namespace Database.Utils
                 new Event
                 {
                     Name = "Gwiezdne Wojny 7",
-                    Date = DateTime.ParseExact("20/04/2015", "dd/mm/yyyy", CultureInfo.InvariantCulture),
+                    Date = DateTime.Today.AddDays(3),
                     Time = new TimeSpan(10,0,0),
                     ImagePath = "/Images/vader.jpg",
                     Description = "Najnowsza część sagi",

@@ -12,7 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using KulturPro.ViewModels;
+using KulturPRO.ViewModels.Reservations;
 
 namespace KulturPRO.Views.Reservations
 {
@@ -24,7 +24,7 @@ namespace KulturPRO.Views.Reservations
         public ReservationsList()
         {
             InitializeComponent();
-            DataContext = new ReservationsList();
+            DataContext = new ReservationsListViewModel();
         }
     }
 }

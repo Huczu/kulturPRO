@@ -94,8 +94,6 @@ namespace Database.Services
             }
         }
 
-
-
         public void DeleteEvent(Event Event)
         {
             log.Info("Użytkownik Pat usunął wydarzenie " + Event.Name);
@@ -104,6 +102,20 @@ namespace Database.Services
                 Event evvent = context.Events.Where(e => e.Id == Event.Id).First();
                 context.Events.Remove(evvent);
                 context.SaveChangesAsync();
+            }
+        }
+
+        public async Task<ICollection<Event>> GetEventsAfterDate(DateTime date)
+        {
+            log.DebugFormat("Getting events after date {0}", date);
+
+            using (var context = new DatabaseContext())
+            {
+                var events = await context.Events.Where(e => e.Date > date).OrderBy(e => e.Date).ToListAsync();
+
+                log.DebugFormat("Found {0} events", events.Count);
+
+                return events;
             }
         }
     }

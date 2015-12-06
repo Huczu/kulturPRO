@@ -6,6 +6,18 @@
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
     <Grid>
-            
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="100*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="5*"></RowDefinition>
+            <RowDefinition Height="90*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <ComboBox
+            Name="eventsList"
+            ItemsSource="{Binding Events}" 
+            DisplayMemberPath="NameWithDate" 
+            SelectedIndex="{Binding SelectedEvent}" 
+            Grid.Column="1"/>
     </Grid>
 </UserControl>
