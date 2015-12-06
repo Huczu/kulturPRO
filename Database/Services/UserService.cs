@@ -17,6 +17,5 @@ namespace Database.Services
                 return await context.Users.FindAsync(id);
             }
         }
-        
     }
 }

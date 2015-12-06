@@ -6,6 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 using Database.Services;
+using KulturPRO.Utillities;
 using log4net;
 
 namespace KulturPRO
@@ -18,9 +19,8 @@ namespace KulturPRO
         private static readonly ILog log = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         protected override void OnStartup(StartupEventArgs e)
         {
-            UserService service = new UserService();
+            MapperConfig.Config();
             log4net.Config.XmlConfigurator.Configure();
-            var user = service.GetUserById(1).Result;
 
             base.OnStartup(e);
         }

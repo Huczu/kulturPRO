@@ -17,6 +17,7 @@ namespace Database.Services
                 return context.Seats.OrderBy(ch => ch.Id).ToList();
             }
         }
+
         public Seat GetSeatsByIdColumnAndRow(int id,int column,int row)
         {
             using (var context = new DatabaseContext())
