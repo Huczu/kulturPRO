@@ -22,6 +22,13 @@ namespace Database.Models
         [ForeignKey("EventId")]
         public Event Event { get; set; }
 
+        [Description("Imię i nazwisko rezerwującego")]
+        public string PersonFullName { get; set; }
+
+        [Description("Telefon rezerwującego")]
+        [MaxLength(9)]
+        public int PhoneNumber { get; set; }
+
         public ICollection<SeatReservation> SeatReservations { get; set; }
     }
 }
