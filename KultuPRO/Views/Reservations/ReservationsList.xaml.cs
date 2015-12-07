@@ -25,5 +25,13 @@ namespace KulturPRO.Views.Reservations
         {
             InitializeComponent();
         }
+
+        public void UpdateReservationList(object sender, SelectionChangedEventArgs e)
+        {
+            if(dgReservations!=null)
+            {
+                dgReservations.GetBindingExpression(DataGrid.ItemsSourceProperty).UpdateTarget();
+            }
+        }
     }
 }

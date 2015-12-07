@@ -31,9 +31,11 @@
             ItemsSource="{Binding Path=Events}" 
             DisplayMemberPath="NameWithDate" 
             SelectedIndex="{Binding Path=SelectedEvent}" 
+            SelectionChanged="UpdateReservationList"
             Grid.ColumnSpan="2"
             Grid.Row="0"/>
         <DataGrid
+            x:Name="dgReservations"
             Grid.ColumnSpan="2"
             Grid.Row="1"
             IsReadOnly="true"
