@@ -20,16 +20,41 @@ namespace KulturPRO.Views.Reservations
     /// </summary>
     public partial class ReservationView : Window
     {
+        private readonly ReservationsListViewModel _parent;
+        private readonly ReservationViewModel _reservationViewModel;
+
+        //for new reservation creation
         public ReservationView(ReservationsListViewModel parent, long eventId)
         {
             InitializeComponent();
-            DataContext = new ReservationViewModel(eventId);
+            _reservationViewModel = new ReservationViewModel(eventId);
+            DataContext = _reservationViewModel;
+            _parent = parent;
+
+            RegisterEvents();
         }
 
+        //for viewing/editing existing reservation
         public ReservationView(ReservationsListViewModel parent, long eventId, long reservationId)
         {
             InitializeComponent();
-            DataContext = new ReservationViewModel(eventId);
+            _reservationViewModel = new ReservationViewModel(eventId);
+            DataContext = _reservationViewModel;
+            _parent = parent;
+
+            RegisterEvents();
+        }
+
+        private void RegisterEvents()
+        {
+            ButtonSave.Click += Button_Save_OnClick;
+        }
+
+        public void Button_Save_OnClick(object sender, RoutedEventArgs e)
+        {
+            _reservationViewModel.PostToAdd();
+            _parent.Reservations.Add(_reservationViewModel.Reservation);
+            this.Close();
         }
     }
 }

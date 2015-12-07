@@ -35,7 +35,6 @@ namespace Database.Services
                 log.DebugFormat("Getting reservation with id = {0}", id);
                 
                 return await context.Reservations
-                    .Include(r => r.SeatReservations)
                     .Include(r => r.Event)
                     .Where(r => r.Id.Equals(id))
                     .FirstOrDefaultAsync();
@@ -53,6 +52,31 @@ namespace Database.Services
                 var seatsAvailible = seats.CinemaHall.Seats.Count(s => s.State.Equals(SeatState.Free) || s.State.Equals(SeatState.Taken));
 
                 return reservedSeats < seatsAvailible;
+            }
+        }
+
+        public async Task<ICollection<SeatReservation>> GetSeatReservationsForReservationId(long reservationId)
+        {
+            log.DebugFormat("getting seat reservations for reservation {0}", reservationId);
+
+            using (var context = new DatabaseContext())
+            {
+                return await context.SeatReservations.Where(sr => sr.ReservationId.Equals(reservationId)).Include(sr => sr.Ticket).ToListAsync();
+            }
+        }
+
+        public async Task<long> AddReservationForEventId(Reservation reservation)
+        {
+            log.DebugFormat("adding new reservation for {0} seats for event {1}", reservation.SeatReservations.Count, reservation.EventId);
+
+            using (var context = new DatabaseContext())
+            {
+                context.Reservations.Add(reservation);
+                await context.SaveChangesAsync("USEROW NIE MA A A A");
+
+                log.DebugFormat("created new reservation with id {0}", reservation.Id);
+
+                return reservation.Id;
             }
         }
     }
