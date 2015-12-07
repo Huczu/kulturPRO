@@ -133,8 +133,12 @@
     <Compile Include="ViewModels\Reservations\ReservationsListViewModel.cs" />
     <Compile Include="ViewModels\ShowEventsOnListViewModel.cs" />
     <Compile Include="ViewModels\UserViewModel.cs" />
-    <Compile Include="Views\AddEventView.xaml.cs" />
-    <Compile Include="Views\EventAsListBoxItemView.xaml.cs" />
+    <Compile Include="Views\AddEventView.xaml.cs" >
+		<DependentUpon>AddEventView.xaml</DependentUpon>
+	</Compile>
+    <Compile Include="Views\EventAsListBoxItemView.xaml.cs" >
+		<DependentUpon>EventAsListBoxItemView.xaml</DependentUpon>
+	</Compile>
     <Compile Include="Views\AdminView.xaml.cs">
       <DependentUpon>AdminView.xaml</DependentUpon>
     </Compile>
@@ -163,7 +167,9 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Compile Include="Views\ShowEventsView.xaml.cs" />
+    <Compile Include="Views\ShowEventsView.xaml.cs" >
+		<DependentUpon>ShowEventsView.xaml</DependentUpon>
+    </Compile>
     <Page Include="Views\AddEventView.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>
