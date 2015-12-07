@@ -41,5 +41,19 @@ namespace Database.Services
                     .FirstOrDefaultAsync();
             }
         }
+
+        public async Task<bool> CanReserveForEvent(long eventId)
+        {
+            log.DebugFormat("checking if can do reservation for event id = {0}", eventId);
+
+            using (var context = new DatabaseContext())
+            {
+                var reservedSeats = await context.SeatReservations.Where(sr => sr.Reservation.EventId.Equals(eventId)).CountAsync();
+                var seats = await context.Events.Where(e => e.Id.Equals(eventId)).Include(e => e.CinemaHall.Seats).FirstAsync();
+                var seatsAvailible = seats.CinemaHall.Seats.Count(s => s.State.Equals(SeatState.Free) || s.State.Equals(SeatState.Taken));
+
+                return reservedSeats < seatsAvailible;
+            }
+        }
     }
 }

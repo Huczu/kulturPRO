@@ -27,8 +27,13 @@ namespace Database.Models
 
         [Description("Telefon rezerwującego")]
         [MaxLength(9)]
-        public int PhoneNumber { get; set; }
+        public string PhoneNumber { get; set; }
 
         public ICollection<SeatReservation> SeatReservations { get; set; }
+
+        public bool IsPaid
+        {
+            get { return SeatReservations.Any(r => !r.IsPaid); }
+        }
     }
 }

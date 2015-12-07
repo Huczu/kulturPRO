@@ -130,7 +130,8 @@ namespace Database.Utils
                     Time = new TimeSpan(12,15,0),
                     ImagePath = "/Images/papa.jpg",
                     Description = "Film komediowy",
-                    DefaultTicketId = 1
+                    DefaultTicketId = 1,
+                    CinemaHallId = 1
                 },
                 new Event
                 {
@@ -139,7 +140,8 @@ namespace Database.Utils
                     Time = new TimeSpan(12,45,0),
                     ImagePath = "/Images/urban.jpg",
                     Description = "Film animowany dla młodszych",
-                    DefaultTicketId = 1
+                    DefaultTicketId = 1,
+                    CinemaHallId = 1
                 },
                 new Event
                 {
@@ -148,7 +150,8 @@ namespace Database.Utils
                     Time = new TimeSpan(10,0,0),
                     ImagePath = "/Images/vader.jpg",
                     Description = "Najnowsza część sagi",
-                    DefaultTicketId = 1
+                    DefaultTicketId = 1,
+                    CinemaHallId = 1
                 }
             });
             context.SaveChanges(user.FullName);
@@ -156,6 +159,8 @@ namespace Database.Utils
             context.Reservations.Add(new Reservation
             {
                 EventId = 1,
+                PersonFullName = "test test",
+                PhoneNumber = "123456789",
                 SeatReservations = new List<SeatReservation>
                 {
                     new SeatReservation

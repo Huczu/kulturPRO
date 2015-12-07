@@ -165,4 +165,17 @@ namespace KulturPRO.Utillities
             return (Brush)TypeDescriptor.GetConverter(typeof(Brush)).ConvertFromString(brushName);
         }
     }
+
+    public class BooleanConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+        {
+            return System.Convert.ToBoolean(value) ? "Tak" : "Nie";
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
+    }
 }

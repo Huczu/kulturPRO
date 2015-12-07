@@ -10,20 +10,26 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 using KulturPRO.ViewModels.Reservations;
 
 namespace KulturPRO.Views.Reservations
 {
     /// <summary>
-    /// Interaction logic for ReservationsList.xaml
+    /// Interaction logic for ReservationView.xaml
     /// </summary>
-    public partial class ReservationsList : UserControl
+    public partial class ReservationView : Window
     {
-        public ReservationsList()
+        public ReservationView(ReservationsListViewModel parent, long eventId)
         {
             InitializeComponent();
+            DataContext = new ReservationViewModel(eventId);
+        }
+
+        public ReservationView(ReservationsListViewModel parent, long eventId, long reservationId)
+        {
+            InitializeComponent();
+            DataContext = new ReservationViewModel(eventId);
         }
     }
 }

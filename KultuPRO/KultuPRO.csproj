@@ -131,14 +131,15 @@
     <Compile Include="ViewModels\IOnListViewModel.cs" />
     <Compile Include="ViewModels\RelayCommand.cs" />
     <Compile Include="ViewModels\Reservations\ReservationsListViewModel.cs" />
+    <Compile Include="ViewModels\Reservations\ReservationViewModel.cs" />
     <Compile Include="ViewModels\ShowEventsOnListViewModel.cs" />
     <Compile Include="ViewModels\UserViewModel.cs" />
-    <Compile Include="Views\AddEventView.xaml.cs" >
-		<DependentUpon>AddEventView.xaml</DependentUpon>
-	</Compile>
-    <Compile Include="Views\EventAsListBoxItemView.xaml.cs" >
-		<DependentUpon>EventAsListBoxItemView.xaml</DependentUpon>
-	</Compile>
+    <Compile Include="Views\AddEventView.xaml.cs">
+      <DependentUpon>AddEventView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\EventAsListBoxItemView.xaml.cs">
+      <DependentUpon>EventAsListBoxItemView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\AdminView.xaml.cs">
       <DependentUpon>AdminView.xaml</DependentUpon>
     </Compile>
@@ -160,6 +161,9 @@
     <Compile Include="Views\Reservations\ReservationsList.xaml.cs">
       <DependentUpon>ReservationsList.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Reservations\ReservationView.xaml.cs">
+      <DependentUpon>ReservationView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\SettingsControl.xaml.cs">
       <DependentUpon>SettingsControl.xaml</DependentUpon>
     </Compile>
@@ -167,8 +171,8 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Compile Include="Views\ShowEventsView.xaml.cs" >
-		<DependentUpon>ShowEventsView.xaml</DependentUpon>
+    <Compile Include="Views\ShowEventsView.xaml.cs">
+      <DependentUpon>ShowEventsView.xaml</DependentUpon>
     </Compile>
     <Page Include="Views\AddEventView.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -219,6 +223,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="Views\Reservations\ReservationsList.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Reservations\ReservationView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
