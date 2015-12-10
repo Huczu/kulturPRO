@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using KulturPRO.ViewModels.Reservations;
+using KulturPRO.Views;
 
 namespace KulturPRO.Views.Reservations
 {
@@ -31,6 +32,7 @@ namespace KulturPRO.Views.Reservations
             DataContext = _reservationViewModel;
             _parent = parent;
 
+            Title = "Nowa rezerwacja";
             RegisterEvents();
         }
 
@@ -38,10 +40,13 @@ namespace KulturPRO.Views.Reservations
         public ReservationView(ReservationsListViewModel parent, long eventId, long reservationId)
         {
             InitializeComponent();
-            _reservationViewModel = new ReservationViewModel(eventId);
+            _reservationViewModel = new ReservationViewModel(eventId, reservationId);
             DataContext = _reservationViewModel;
             _parent = parent;
 
+            ReservationHall.Content = new generating(_reservationViewModel.GetSeatsReserved() ,_reservationViewModel.Reservation.Event.CinemaHallId);
+
+            Title = "Rezerwacja nr " + reservationId;
             RegisterEvents();
         }
 

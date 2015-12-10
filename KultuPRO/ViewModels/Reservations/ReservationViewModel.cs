@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using Database.Models;
@@ -32,6 +33,11 @@ namespace KulturPRO.ViewModels.Reservations
             get { return _seatReservations; }
         }
 
+        public List<Seat> GetSeatsReserved()
+        {
+            return SeatReservations.Select(s => s.Seat).ToList();
+        }
+
         public ReservationViewModel(long eventId)
         {
             _eventId = eventId;
@@ -44,6 +50,8 @@ namespace KulturPRO.ViewModels.Reservations
         public ReservationViewModel(long eventId, long reservationId)
         {
             _eventId = eventId;
+            Reservation = _reservationService.GetReservationById(reservationId).Result;
+            SeatReservations = new ObservableCollection<SeatReservation>( _reservationService.GetSeatReservationsForReservationId(reservationId).Result );
         }
 
         public void PostToAdd()

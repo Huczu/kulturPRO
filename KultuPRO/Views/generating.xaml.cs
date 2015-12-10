@@ -44,6 +44,18 @@ namespace KulturPRO.Views
             cbCinemaHall_SelectionChanged(null, null);
         }
 
+        public generating(List<Seat> seatsTaken, long hallId)
+        {
+            InitializeComponent();
+            cbCinemaHall.Visibility = Visibility.Hidden;
+            cbCinemaHall.IsEnabled = false;
+            btResetView.Visibility = Visibility.Hidden;
+            btResetView.IsEnabled = false;
+            cbDeletingSeatEnabled.Visibility = Visibility.Hidden;
+            cbDeletingSeatEnabled.IsEnabled = false;
+            FillHall(seatsTaken, hallId);
+        }
+
         void fill_combo()
         {
             Database.Services.HallService hallService = new Database.Services.HallService();
@@ -53,6 +65,59 @@ namespace KulturPRO.Views
             cbCinemaHall.ItemsSource = xd.ToList();
             cbCinemaHall.SelectedValuePath = "Id";
             cbCinemaHall.SelectedIndex = 0;
+        }
+
+        private async void FillHall(List<Seat> seatsTaken, long hallId)
+        {
+            grdMain.Children.Clear();
+            Database.Services.HallService hallService = new Database.Services.HallService();
+            var selectedHall = await hallService.GetHallById(hallId);
+
+            grdMain.Columns = selectedHall.MaxColumns;
+            grdMain.Rows = selectedHall.MaxRows;
+
+            bt = new Button[grdMain.Columns, grdMain.Rows];
+
+            foreach (var seat in selectedHall.Seats)
+            {
+                bt[seat.Column - 1, seat.Row - 1] = new Button
+                {
+                    Height = height,
+                    Width = width,
+                    HorizontalAlignment = HorizontalAlignment.Stretch,
+                    VerticalAlignment = VerticalAlignment.Stretch,
+                    Content = seat.Column + seat.Row,
+                    Tag = Tuple.Create(seat.Column, seat.Row, selectedHall.Id),
+                    Background = seat.State.Equals(SeatState.NotExists) ? Brushes.White : Brushes.Green,
+                    Visibility = seat.State.Equals(SeatState.NotExists) ? Visibility.Hidden : Visibility.Visible,
+                    Margin = new Thickness(1)
+                };
+
+                if (seat.State != SeatState.NotExists)
+                    bt[seat.Column - 1, seat.Row - 1].Click += Button_Click;
+            }
+
+            foreach (var seatTaken in seatsTaken)
+            {
+                bt[seatTaken.Column - 1, seatTaken.Row - 1].IsEnabled = false;
+                bt[seatTaken.Column - 1, seatTaken.Row - 1].Focusable = false;
+                bt[seatTaken.Column - 1, seatTaken.Row - 1].Background = Brushes.Red;
+                bt[seatTaken.Column - 1, seatTaken.Row - 1].Foreground = Brushes.Red;
+            }
+
+            for (int i = 0; i < bt.GetLength(0); i++)
+            {
+                for (int j = 0; j < bt.GetLength(1); j++)
+                {
+                    if (bt[i, j] == null)
+                        continue;                   //jeśli jest zerowe pole
+
+                    grdMain.Children.Add(bt[i, j]); //dodajemy miejsce
+
+                    Grid.SetRow(grdMain.Children[grdMain.Children.Count - 1], i);
+                    Grid.SetColumn(grdMain.Children[grdMain.Children.Count - 1], j);
+                }
+            }
         }
         
         public void cbCinemaHall_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -142,12 +207,9 @@ namespace KulturPRO.Views
             }
 
         }
-
-       
        
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-
             string b = (sender as Button).Tag.ToString();
             string c = b.TrimEnd(')');
             string f = c.TrimStart('(');
@@ -197,13 +259,12 @@ namespace KulturPRO.Views
 
         }
 
-       
-
         private void checkBox_Checked(object sender, RoutedEventArgs e)
         {
             MessageBox.Show("włączono usuwanie miejsc");
             Globals.prawda = false;
         }
+
         private void CheckBox_Unchecked(object sender, RoutedEventArgs e)
         {
             Globals.prawda = true;

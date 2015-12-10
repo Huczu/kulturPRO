@@ -61,7 +61,7 @@ namespace Database.Services
 
             using (var context = new DatabaseContext())
             {
-                return await context.SeatReservations.Where(sr => sr.ReservationId.Equals(reservationId)).Include(sr => sr.Ticket).ToListAsync();
+                return await context.SeatReservations.Where(sr => sr.ReservationId.Equals(reservationId)).Include(sr => sr.Ticket).Include(sr => sr.Seat).ToListAsync();
             }
         }
 

@@ -34,5 +34,13 @@ namespace Database.Services
                 context.SaveChanges();
             }
         }
+
+        public async Task<ICollection<Seat>> GetSeatsByHallId(long hallId)
+        {
+            using (var context = new DatabaseContext())
+            {
+                return await context.Seats.Where(s => s.CinemaHallId.Equals(hallId)).ToListAsync();
+            }
+        }
     }
 }

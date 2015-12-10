@@ -47,7 +47,8 @@
             CanUserResizeRows="true"
             CanUserSortColumns="true"
             AutoGenerateColumns="false"
-            ColumnWidth="*">
+            ColumnWidth="*"
+            MouseDoubleClick="Row_MouseDoubleClick">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Numer rezerwacji" Binding="{Binding Path=Id}"/>
                 <DataGridTextColumn Header="Imię i nazwisko rezerwującego" Binding="{Binding Path=PersonFullName}"/>

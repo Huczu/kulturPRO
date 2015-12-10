@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Database.Models;
 using KulturPRO.ViewModels.Reservations;
 
 namespace KulturPRO.Views.Reservations
@@ -31,6 +32,19 @@ namespace KulturPRO.Views.Reservations
             if(dgReservations!=null)
             {
                 dgReservations.GetBindingExpression(DataGrid.ItemsSourceProperty).UpdateTarget();
+            }
+        }
+
+        private void Row_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            DataGridRow row = ItemsControl.ContainerFromElement((DataGrid)sender, e.OriginalSource as DependencyObject) as DataGridRow;
+
+            if (row != null)
+            {
+                var item = row.Item as Reservation;
+
+                ReservationView reservationDetails = new ReservationView(DataContext as ReservationsListViewModel, item.EventId, item.Id);
+                reservationDetails.Show();
             }
         }
     }
