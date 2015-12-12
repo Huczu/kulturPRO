@@ -36,6 +36,9 @@ namespace Database.Services
                 
                 return await context.Reservations
                     .Include(r => r.Event)
+                    .Include(r => r.SeatReservations)
+                    .Include(r => r.SeatReservations.Select(sr => sr.Seat))
+                    .Include(r => r.SeatReservations.Select(sr => sr.Ticket))
                     .Where(r => r.Id.Equals(id))
                     .FirstOrDefaultAsync();
             }
@@ -77,6 +80,16 @@ namespace Database.Services
                 log.DebugFormat("created new reservation with id {0}", reservation.Id);
 
                 return reservation.Id;
+            }
+        }
+
+        public async Task<SeatReservation> GetSeatReservationById(long id)
+        {
+            log.DebugFormat("getting seat reservation with id {0}", id);
+
+            using (var context = new DatabaseContext())
+            {
+                return await context.SeatReservations.Include(sr => sr.Seat).Include(sr => sr.Ticket).Where(sr => sr.Id.Equals(id)).SingleAsync();
             }
         }
     }

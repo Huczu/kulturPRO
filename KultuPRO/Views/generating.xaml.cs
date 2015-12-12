@@ -35,7 +35,7 @@ namespace KulturPRO.Views
         ObservableCollection<SeatState> f1;
         int height = 30;        //parametry miejsc(elementów) w sali(button)
         int width = 30;
-        
+        private readonly bool _isClickable;
 
         public generating()
         {
@@ -44,7 +44,7 @@ namespace KulturPRO.Views
             cbCinemaHall_SelectionChanged(null, null);
         }
 
-        public generating(List<Seat> seatsTaken, long hallId)
+        public generating(List<Seat> seatsTaken, long hallId, bool isClickable)
         {
             InitializeComponent();
             cbCinemaHall.Visibility = Visibility.Hidden;
@@ -54,6 +54,8 @@ namespace KulturPRO.Views
             cbDeletingSeatEnabled.Visibility = Visibility.Hidden;
             cbDeletingSeatEnabled.IsEnabled = false;
             FillHall(seatsTaken, hallId);
+
+            _isClickable = isClickable;
         }
 
         void fill_combo()
@@ -90,10 +92,11 @@ namespace KulturPRO.Views
                     Tag = Tuple.Create(seat.Column, seat.Row, selectedHall.Id),
                     Background = seat.State.Equals(SeatState.NotExists) ? Brushes.White : Brushes.Green,
                     Visibility = seat.State.Equals(SeatState.NotExists) ? Visibility.Hidden : Visibility.Visible,
-                    Margin = new Thickness(1)
+                    Margin = new Thickness(1),
+                    IsEnabled = _isClickable
                 };
 
-                if (seat.State != SeatState.NotExists)
+                if ((seat.State != SeatState.NotExists))
                     bt[seat.Column - 1, seat.Row - 1].Click += Button_Click;
             }
 

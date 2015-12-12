@@ -51,7 +51,7 @@ namespace KulturPRO.ViewModels.Reservations
         {
             _eventId = eventId;
             Reservation = _reservationService.GetReservationById(reservationId).Result;
-            SeatReservations = new ObservableCollection<SeatReservation>( _reservationService.GetSeatReservationsForReservationId(reservationId).Result );
+            SeatReservations = new ObservableCollection<SeatReservation>(Reservation.SeatReservations);
         }
 
         public void PostToAdd()

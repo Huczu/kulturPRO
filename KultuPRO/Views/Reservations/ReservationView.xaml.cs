@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Database.Models;
 using KulturPRO.ViewModels.Reservations;
 using KulturPRO.Views;
 
@@ -44,7 +45,7 @@ namespace KulturPRO.Views.Reservations
             DataContext = _reservationViewModel;
             _parent = parent;
 
-            ReservationHall.Content = new generating(_reservationViewModel.GetSeatsReserved() ,_reservationViewModel.Reservation.Event.CinemaHallId);
+            ReservationHall.Content = new generating(_reservationViewModel.GetSeatsReserved(), _reservationViewModel.Reservation.Event.CinemaHallId, false);
 
             Title = "Rezerwacja nr " + reservationId;
             RegisterEvents();
@@ -53,6 +54,19 @@ namespace KulturPRO.Views.Reservations
         private void RegisterEvents()
         {
             ButtonSave.Click += Button_Save_OnClick;
+        }
+
+        public void Grid_DoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            DataGridRow row = ItemsControl.ContainerFromElement((DataGrid)sender, e.OriginalSource as DependencyObject) as DataGridRow;
+
+            if (row != null)
+            {
+                var item = row.Item as SeatReservation;
+
+                SeatReservationView seatReservationDetails = new SeatReservationView(item.Id);
+                seatReservationDetails.Show();
+            }
         }
 
         public void Button_Save_OnClick(object sender, RoutedEventArgs e)

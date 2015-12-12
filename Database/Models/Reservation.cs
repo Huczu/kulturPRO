@@ -33,7 +33,17 @@ namespace Database.Models
 
         public bool IsPaid
         {
-            get { return SeatReservations.Any(r => !r.IsPaid); }
+            get { return SeatReservations.All(r => r.IsPaid); }
+        }
+
+        public double TotalCost
+        {
+            get { return SeatReservations.Sum(sr => sr.Ticket.Price); }
+        }
+
+        public string PersonFullData
+        {
+            get { return PersonFullName + ", " + PhoneNumber; }
         }
     }
 }

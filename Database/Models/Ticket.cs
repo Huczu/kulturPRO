@@ -27,5 +27,10 @@ namespace Database.Models
 
         [Description("Czy domyślny dla wydarzenia")]
         public bool IsDefaultEventPrice { get; set; }
+
+        public string TypeNameAndPrice
+        {
+            get { return TypeName + ", " + Price; }
+        }
     }
 }
