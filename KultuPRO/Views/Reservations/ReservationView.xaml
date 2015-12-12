@@ -52,6 +52,12 @@
                 <DataGridTextColumn Header="Typ biletu" Binding="{Binding Path=Ticket.TypeName}"/>
                 <DataGridTextColumn Header="Cena biletu" Binding="{Binding Path=Ticket.Price}"/>
             </DataGrid.Columns>
+            <DataGrid.ContextMenu>
+                <ContextMenu>
+                    <MenuItem Header="Usuń" Click="Grid_ContextMenu_Delete_Click"
+                              CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=Parent}"/>
+                </ContextMenu>
+            </DataGrid.ContextMenu>
         </DataGrid>
         <Grid Grid.Row="3">
             <Grid.ColumnDefinitions>

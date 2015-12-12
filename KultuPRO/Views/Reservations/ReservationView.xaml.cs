@@ -15,6 +15,7 @@ using Database.Models;
 using Database.Services;
 using KulturPRO.ViewModels.Reservations;
 using KulturPRO.Views;
+using MenuItem = System.Windows.Forms.MenuItem;
 
 namespace KulturPRO.Views.Reservations
 {
@@ -79,6 +80,27 @@ namespace KulturPRO.Views.Reservations
             }
         }
 
+        public async void Grid_ContextMenu_Delete_Click(object sender, RoutedEventArgs e)
+        {
+            System.Windows.Controls.MenuItem row = sender as System.Windows.Controls.MenuItem;
+
+            if (row != null)
+            {
+                var contextMenu = row.CommandParameter as ContextMenu;
+
+                if (contextMenu != null)
+                {
+                    var grid = contextMenu.PlacementTarget as DataGrid;
+                    var toDeleteFromBindedList = (SeatReservation)grid.SelectedCells[0].Item;
+                    if (await _reservationService.DeleteSeatReservation(toDeleteFromBindedList))
+                    {
+                        _reservationViewModel.UpdateView();
+                        ReservationHall.Content = new generating(_reservationViewModel.GetSeatsReserved(), _reservationViewModel.Reservation.Event.CinemaHallId, false);
+                    }
+                }
+            }
+        }
+
         public void Grid_DoubleClick(object sender, MouseButtonEventArgs e)
         {
             DataGridRow row = ItemsControl.ContainerFromElement((DataGrid)sender, e.OriginalSource as DependencyObject) as DataGridRow;
@@ -97,6 +119,16 @@ namespace KulturPRO.Views.Reservations
             _reservationViewModel.PostToAdd();
             _parent.Reservations.Add(_reservationViewModel.Reservation);
             this.Close();
+        }
+
+        public T GetVisualParent<T>(object childObject) where T : Visual
+        {
+            DependencyObject child = childObject as DependencyObject;
+            while ((child != null) && !(child is T))
+            {
+                child = VisualTreeHelper.GetParent(child);
+            }
+            return child as T;
         }
     }
 }

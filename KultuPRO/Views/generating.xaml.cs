@@ -95,7 +95,7 @@ namespace KulturPRO.Views
                     HorizontalAlignment = HorizontalAlignment.Stretch,
                     VerticalAlignment = VerticalAlignment.Stretch,
                     Content = seat.Column + seat.Row,
-                    Tag = Tuple.Create(seat.Column, seat.Row, selectedHall.Id),
+                    Tag = seat.Id,
                     Background = seat.State.Equals(SeatState.NotExists) ? Brushes.White : Brushes.Green,
                     Visibility = seat.State.Equals(SeatState.NotExists) ? Visibility.Hidden : Visibility.Visible,
                     Margin = new Thickness(1),
@@ -131,12 +131,9 @@ namespace KulturPRO.Views
 
         public void SelectSeatEvent(object sender, RoutedEventArgs e)
         {
-            int[] tupleInts = (sender as Button).Tag.ToString().TrimStart('(').TrimEnd(')').Split(',').Select(int.Parse).ToArray();
+            long seatId = Convert.ToInt64((sender as Button).Tag);
 
-            _seatToSelect.CinemaHallId = _hallId;
-            _seatToSelect.Column = tupleInts[0];
-            _seatToSelect.Row = tupleInts[1];
-            _seatToSelect.State = SeatState.Taken;
+            _seatToSelect.Id = seatId;
         }
         
         public void cbCinemaHall_SelectionChanged(object sender, SelectionChangedEventArgs e)

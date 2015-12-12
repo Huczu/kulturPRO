@@ -105,5 +105,20 @@ namespace Database.Services
 
             log.DebugFormat("added new seat reservation with id = {0}", seatReservation.Id);
         }
+
+        public async Task<bool> DeleteSeatReservation(SeatReservation seatReservation)
+        {
+            log.DebugFormat("trying deleting seat reservation with id {0}", seatReservation.Id);
+
+            using (var context = new DatabaseContext())
+            {
+                context.SeatReservations.Attach(seatReservation);
+                context.SeatReservations.Remove(seatReservation);
+                await context.SaveChangesAsync();
+
+                log.DebugFormat("deleted seat reservation");
+                return true;
+            }
+        }
     }
 }
