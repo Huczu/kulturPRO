@@ -12,10 +12,6 @@
         <converters:BooleanConverter x:Key="boolConverter" />
     </UserControl.Resources>
 
-    <UserControl.DataContext>
-        <viewModels:ReservationsListViewModel />
-    </UserControl.DataContext>
-
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="80*"></ColumnDefinition>
@@ -60,7 +56,7 @@
         <Button
             Grid.Row="2"
             Grid.Column="1"
-            Command="{Binding Path=AddNewViewCommand}">
+            Click="AddNew_Button_OnClick">
             <TextBlock>Dodaj nową rezerwację</TextBlock>
         </Button>
         

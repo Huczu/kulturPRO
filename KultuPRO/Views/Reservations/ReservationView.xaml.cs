@@ -24,24 +24,12 @@ namespace KulturPRO.Views.Reservations
     /// </summary>
     public partial class ReservationView : Window
     {
-        private readonly ReservationsListViewModel _parent;
+        private readonly ReservationsList _parent;
         private readonly ReservationViewModel _reservationViewModel;
         private readonly ReservationService _reservationService = new ReservationService();
 
-        //for new reservation creation
-        public ReservationView(ReservationsListViewModel parent, long eventId)
-        {
-            InitializeComponent();
-            _reservationViewModel = new ReservationViewModel(eventId);
-            DataContext = _reservationViewModel;
-            _parent = parent;
-
-            Title = "Nowa rezerwacja";
-            RegisterEvents();
-        }
-
         //for viewing/editing existing reservation
-        public ReservationView(ReservationsListViewModel parent, long eventId, long reservationId)
+        public ReservationView(ReservationsList parent, long eventId, long reservationId)
         {
             InitializeComponent();
             _reservationViewModel = new ReservationViewModel(eventId, reservationId);
@@ -51,14 +39,6 @@ namespace KulturPRO.Views.Reservations
             ReservationHall.Content = new generating(_reservationViewModel.GetSeatsReserved(), _reservationViewModel.Reservation.Event.CinemaHallId, false);
 
             Title = "Rezerwacja nr " + reservationId;
-            RegisterEvents();
-        }
-
-
-
-        private void RegisterEvents()
-        {
-            ButtonSave.Click += Button_Save_OnClick;
         }
 
         public async void Button_AddSeat_OnClick(object senderr, RoutedEventArgs e)
@@ -66,11 +46,13 @@ namespace KulturPRO.Views.Reservations
             if (await _reservationService.CanReserveForEvent(_reservationViewModel.Reservation.EventId))
             {
                 SeatReservationView seatReservationView = new SeatReservationView(_reservationViewModel.Reservation,
-                    _reservationService.GetSeatReservationsForReservationId(_reservationViewModel.Reservation.Id).Result.Select(r => r.Seat).ToList());
+                    _reservationService.GetAllSeatReservationsForEvent(_reservationViewModel.Reservation.EventId).Result.Select(r => r.Seat).ToList());
                 seatReservationView.Closed += (sender, args) =>
                 {
                     _reservationViewModel.UpdateView();
                     ReservationHall.Content = new generating(_reservationViewModel.GetSeatsReserved(), _reservationViewModel.Reservation.Event.CinemaHallId, false);
+                    _parent._reservationsListViewModel.UpdateReservationsList(_reservationViewModel.Reservation.EventId);
+                    _parent.UpdateReservationList(null, null);
                 };
                 seatReservationView.Show();
             }
@@ -114,21 +96,17 @@ namespace KulturPRO.Views.Reservations
             }
         }
 
-        public void Button_Save_OnClick(object sender, RoutedEventArgs e)
+        public void Edit_Button_OnClick(object sender, RoutedEventArgs e)
         {
-            _reservationViewModel.PostToAdd();
-            _parent.Reservations.Add(_reservationViewModel.Reservation);
-            this.Close();
-        }
-
-        public T GetVisualParent<T>(object childObject) where T : Visual
-        {
-            DependencyObject child = childObject as DependencyObject;
-            while ((child != null) && !(child is T))
+            var createReservation = new CreateReservationView(_reservationViewModel.Reservation.EventId, _parent, _reservationViewModel.Reservation.Id);
+            createReservation.Closed += (o, args) =>
             {
-                child = VisualTreeHelper.GetParent(child);
-            }
-            return child as T;
+                _parent._reservationsListViewModel.UpdateReservationsList(_reservationViewModel.Reservation.EventId);
+                _parent.UpdateReservationList(null, null);
+            };
+
+            this.Close();
+            createReservation.Show();
         }
     }
 }

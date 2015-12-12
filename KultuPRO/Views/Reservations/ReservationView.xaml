@@ -65,16 +65,14 @@
                 <ColumnDefinition Width="12*"/>
                 <ColumnDefinition Width="12*"/>
             </Grid.ColumnDefinitions>
-            <Button
-                Name="ButtonAddSeat"
-                Grid.Column="1"
-                Click="Button_AddSeat_OnClick">
-                <TextBlock>Dodaj miejsce</TextBlock>
+            <Button Grid.Column="1" Click="Edit_Button_OnClick">
+                <TextBlock>Edytuj</TextBlock>
             </Button>
             <Button
-                Name="ButtonSave"
-                Grid.Column="2">
-                <TextBlock>Zapisz</TextBlock>
+                Name="ButtonAddSeat"
+                Grid.Column="2"
+                Click="Button_AddSeat_OnClick">
+                <TextBlock>Dodaj miejsce</TextBlock>
             </Button>
         </Grid>
     </Grid>

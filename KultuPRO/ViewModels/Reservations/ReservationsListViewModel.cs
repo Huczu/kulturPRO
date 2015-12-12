@@ -57,7 +57,7 @@ namespace KulturPRO.ViewModels.Reservations
             set
             {
                 _selectedEvent = value;
-                UpdateReservationsList(value);
+                UpdateReservationsList(_events.ElementAt(Convert.ToInt32(value)).Id);
                 OnPropertyChanged("SelectedEvent");
             }
         }
@@ -70,7 +70,6 @@ namespace KulturPRO.ViewModels.Reservations
 
             //init Commands
             SwitchViewCommand = new RelayCommand(r => SwitchView());
-            AddNewViewCommand = new RelayCommand(r => AddNewView());
 
             //init FunctionalList with sub-functionalities
             FunctionalList = new FunctionalList("Rezerwacje", new List<Function>
@@ -87,7 +86,6 @@ namespace KulturPRO.ViewModels.Reservations
 
             //init Commands
             SwitchViewCommand = new RelayCommand(r => SwitchView());
-            AddNewViewCommand = new RelayCommand(r => AddNewView());
 
             //init FunctionalList with sub-functionalities
             FunctionalList = new FunctionalList("Rezerwacje", new List<Function>
@@ -96,9 +94,9 @@ namespace KulturPRO.ViewModels.Reservations
             });
         }
 
-        private async void UpdateReservationsList(long eventId)
+        public async void UpdateReservationsList(long eventId)
         {
-            var list = await _reservationService.GetReservationsForEventId(_events.ElementAt(Convert.ToInt32(eventId)).Id);
+            var list = await _reservationService.GetReservationsForEventId(eventId);
             Reservations = new ObservableCollection<Reservation>(list);
         }
 
@@ -106,26 +104,9 @@ namespace KulturPRO.ViewModels.Reservations
 
         public ICommand SwitchViewCommand { get; set; }
 
-        public ICommand AddNewViewCommand { get; set; }
-
         public void SwitchView()
         {
             Utillities.WindowAccessMethods.SwitchView(new Views.Reservations.ReservationsList());
-        }
-
-        public async void AddNewView()
-        {
-            if (await _reservationService.CanReserveForEvent(_events.ElementAt(Convert.ToInt32(_selectedEvent)).Id))
-            {
-                ReservationView reservationView = new ReservationView(this, _events.ElementAt(Convert.ToInt32(_selectedEvent)).Id);
-                reservationView.Show();
-            }
-            else
-            {
-                MessageBox.Show("Brak dostępnych miejsc");
-            }
-
-            UpdateReservationsList(_selectedEvent);
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

@@ -68,9 +68,19 @@ namespace Database.Services
             }
         }
 
+        public async Task<ICollection<SeatReservation>> GetAllSeatReservationsForEvent(long eventId)
+        {
+            log.DebugFormat("getting seat reservations for event id {0}", eventId);
+
+            using (var context = new DatabaseContext())
+            {
+                return await context.SeatReservations.Where(sr => sr.Reservation.EventId.Equals(eventId)).Include(sr => sr.Seat).ToListAsync();
+            }
+        }
+
         public async Task<long> AddReservationForEventId(Reservation reservation)
         {
-            log.DebugFormat("adding new reservation for {0} seats for event {1}", reservation.SeatReservations.Count, reservation.EventId);
+            log.DebugFormat("adding new reservation for event {0}", reservation.EventId);
 
             using (var context = new DatabaseContext())
             {
@@ -126,6 +136,23 @@ namespace Database.Services
                 log.DebugFormat("seat reservation not found!");
 
                 return false;
+            }
+        }
+
+        public async Task UpdateReservation(Reservation reservation)
+        {
+            log.DebugFormat("updating reservation with id {0}", reservation.Id);
+
+            using (var context = new DatabaseContext())
+            {
+                var item = await context.Reservations.FindAsync(reservation.Id);
+
+                item.PersonFullName = reservation.PersonFullName;
+                item.PhoneNumber = reservation.PhoneNumber;
+
+                await context.SaveChangesAsync();
+
+                log.DebugFormat("updated reservation with id {0}", reservation.Id);
             }
         }
     }

@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Database.Models;
+using Database.Services;
 using KulturPRO.ViewModels.Reservations;
 
 namespace KulturPRO.Views.Reservations
@@ -22,9 +23,14 @@ namespace KulturPRO.Views.Reservations
     /// </summary>
     public partial class ReservationsList : UserControl
     {
+        public readonly ReservationsListViewModel _reservationsListViewModel = new ReservationsListViewModel();
+
+        private readonly ReservationService _reservationService = new ReservationService();
+
         public ReservationsList()
         {
             InitializeComponent();
+            DataContext = _reservationsListViewModel;
         }
 
         public void UpdateReservationList(object sender, SelectionChangedEventArgs e)
@@ -43,8 +49,33 @@ namespace KulturPRO.Views.Reservations
             {
                 var item = row.Item as Reservation;
 
-                ReservationView reservationDetails = new ReservationView(DataContext as ReservationsListViewModel, item.EventId, item.Id);
+                ReservationView reservationDetails = new ReservationView(this, item.EventId, item.Id);
+                reservationDetails.Closed += (o, args) =>
+                {
+                    _reservationsListViewModel.UpdateReservationsList(item.EventId);
+                    UpdateReservationList(null, null);
+                };
                 reservationDetails.Show();
+            }
+        }
+
+        private async void AddNew_Button_OnClick(object sender, RoutedEventArgs e)
+        {
+            var eventId = _reservationsListViewModel.Events.ElementAt(Convert.ToInt32(_reservationsListViewModel.SelectedEvent)).Id;
+
+            if (await _reservationService.CanReserveForEvent(eventId))
+            {
+                CreateReservationView createReservationView = new CreateReservationView(eventId, this);
+                createReservationView.Closed += (o, args) =>
+                {
+                    _reservationsListViewModel.UpdateReservationsList(eventId);
+                    UpdateReservationList(null, null);
+                };
+                createReservationView.Show();
+            }
+            else
+            {
+                MessageBox.Show("Brak wolnych miejsc");
             }
         }
     }
