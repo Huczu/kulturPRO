@@ -6,8 +6,11 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Input;
 using Database.Models;
 using Database.Services;
+using KulturPRO.Views.Reservations;
 
 namespace KulturPRO.ViewModels.Reservations
 {
@@ -45,6 +48,7 @@ namespace KulturPRO.ViewModels.Reservations
             {
                 EventId = eventId
             };
+            AddNewSeatCommand = new RelayCommand(r => AddNewSeat());
         }
 
         public ReservationViewModel(long eventId, long reservationId)
@@ -52,11 +56,39 @@ namespace KulturPRO.ViewModels.Reservations
             _eventId = eventId;
             Reservation = _reservationService.GetReservationById(reservationId).Result;
             SeatReservations = new ObservableCollection<SeatReservation>(Reservation.SeatReservations);
+            AddNewSeatCommand = new RelayCommand(r => AddNewSeat());
         }
 
         public void PostToAdd()
         {
             return;
+        }
+
+        public ICommand AddNewSeatCommand { get; set; }
+        public async void AddNewSeat()
+        {
+            if (await _reservationService.CanReserveForEvent(Reservation.EventId))
+            {
+                SeatReservationView seatReservationView = new SeatReservationView(Reservation,
+                    _reservationService.GetSeatReservationsForReservationId(Reservation.Id).Result.Select(r => r.Seat).ToList());
+                seatReservationView.Closed += (sender, args) =>
+                {
+                    UpdateView();
+                };
+                seatReservationView.Show();
+            }
+            else
+            {
+                MessageBox.Show("Brak wolnych miejsc");
+            }
+        }
+
+        public async void UpdateView()
+        {
+            Reservation = await _reservationService.GetReservationById(Reservation.Id);
+            SeatReservations = new ObservableCollection<SeatReservation>(Reservation.SeatReservations);
+            OnPropertyChanged("SeatReservations");
+            OnPropertyChanged("Reservation");
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

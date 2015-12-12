@@ -15,12 +15,8 @@
             <RowDefinition Height="35*"/>
             <RowDefinition Height="5*"/>
         </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="90*"/>
-            <ColumnDefinition Width="10*"/>
-        </Grid.ColumnDefinitions>
-        <ContentPresenter Name="ReservationHall" Grid.ColumnSpan="2" Grid.Row="0"/>
-        <Grid Grid.Row="1" Grid.ColumnSpan="2">
+        <ContentPresenter Name="ReservationHall" Grid.Row="0"/>
+        <Grid Grid.Row="1">
             <Grid.RowDefinitions>
                 <RowDefinition Height="33*"/>
                 <RowDefinition Height="33*"/>
@@ -40,7 +36,6 @@
         </Grid>
         <DataGrid 
             Grid.Row="2"
-            Grid.ColumnSpan="2"
             ItemsSource="{Binding Path=SeatReservations}"
             AutoGenerateColumns="false"
             CanUserAddRows="False"
@@ -58,11 +53,23 @@
                 <DataGridTextColumn Header="Cena biletu" Binding="{Binding Path=Ticket.Price}"/>
             </DataGrid.Columns>
         </DataGrid>
-        <Button
-            Name="ButtonSave"
-            Grid.Row="3"
-            Grid.Column="1">
-            <TextBlock>Zapisz</TextBlock>
-        </Button>
+        <Grid Grid.Row="3">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="80*"/>
+                <ColumnDefinition Width="12*"/>
+                <ColumnDefinition Width="12*"/>
+            </Grid.ColumnDefinitions>
+            <Button
+                Name="ButtonAddSeat"
+                Grid.Column="1"
+                Click="Button_AddSeat_OnClick">
+                <TextBlock>Dodaj miejsce</TextBlock>
+            </Button>
+            <Button
+                Name="ButtonSave"
+                Grid.Column="2">
+                <TextBlock>Zapisz</TextBlock>
+            </Button>
+        </Grid>
     </Grid>
 </Window>

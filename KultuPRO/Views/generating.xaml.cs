@@ -36,6 +36,10 @@ namespace KulturPRO.Views
         int height = 30;        //parametry miejsc(elementów) w sali(button)
         int width = 30;
         private readonly bool _isClickable;
+        private readonly long _hallId;
+
+        private Seat _seatToSelect;
+
 
         public generating()
         {
@@ -44,8 +48,12 @@ namespace KulturPRO.Views
             cbCinemaHall_SelectionChanged(null, null);
         }
 
-        public generating(List<Seat> seatsTaken, long hallId, bool isClickable)
+        public generating(List<Seat> seatsTaken, long hallId, bool isClickable, Seat seatToSelect = null)
         {
+            _isClickable = isClickable;
+            _hallId = hallId;
+            _seatToSelect = seatToSelect;
+
             InitializeComponent();
             cbCinemaHall.Visibility = Visibility.Hidden;
             cbCinemaHall.IsEnabled = false;
@@ -54,8 +62,6 @@ namespace KulturPRO.Views
             cbDeletingSeatEnabled.Visibility = Visibility.Hidden;
             cbDeletingSeatEnabled.IsEnabled = false;
             FillHall(seatsTaken, hallId);
-
-            _isClickable = isClickable;
         }
 
         void fill_combo()
@@ -97,7 +103,7 @@ namespace KulturPRO.Views
                 };
 
                 if ((seat.State != SeatState.NotExists))
-                    bt[seat.Column - 1, seat.Row - 1].Click += Button_Click;
+                    bt[seat.Column - 1, seat.Row - 1].Click += SelectSeatEvent;
             }
 
             foreach (var seatTaken in seatsTaken)
@@ -121,6 +127,16 @@ namespace KulturPRO.Views
                     Grid.SetColumn(grdMain.Children[grdMain.Children.Count - 1], j);
                 }
             }
+        }
+
+        public void SelectSeatEvent(object sender, RoutedEventArgs e)
+        {
+            int[] tupleInts = (sender as Button).Tag.ToString().TrimStart('(').TrimEnd(')').Split(',').Select(int.Parse).ToArray();
+
+            _seatToSelect.CinemaHallId = _hallId;
+            _seatToSelect.Column = tupleInts[0];
+            _seatToSelect.Row = tupleInts[1];
+            _seatToSelect.State = SeatState.Taken;
         }
         
         public void cbCinemaHall_SelectionChanged(object sender, SelectionChangedEventArgs e)

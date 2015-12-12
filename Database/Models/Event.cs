@@ -53,12 +53,8 @@ namespace Database.Models
         [Description("Opis")]
         public string Description { get; set; }
 
-        [Description("Id domyślnego biletu")]
-        public long DefaultTicketId { get; set; }
-
-        [ForeignKey("DefaultTicketId")]
-        public Ticket DefaultTicket { get; set; }
-
+        public ICollection<Ticket> TicketTypes { get; set; }
+            
         [Description("Id sali")]
         public long CinemaHallId { get; set; }
 

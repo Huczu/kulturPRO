@@ -93,6 +93,7 @@
     <Compile Include="Services\HallService.cs" />
     <Compile Include="Services\ReservationService.cs" />
     <Compile Include="Services\SeatService.cs" />
+    <Compile Include="Services\TicketService.cs" />
     <Compile Include="Services\UserService.cs" />
     <Compile Include="Utils\DatabaseInit.cs" />
   </ItemGroup>

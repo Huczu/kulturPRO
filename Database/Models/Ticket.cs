@@ -14,6 +14,7 @@ namespace Database.Models
     public class Ticket
     {
         [Description("Id")]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public long Id { get; set; }
 
         [Description("Typ biletu")]
@@ -27,6 +28,8 @@ namespace Database.Models
 
         [Description("Czy domyślny dla wydarzenia")]
         public bool IsDefaultEventPrice { get; set; }
+
+        public ICollection<Event> EventsUsingTicket { get; set; } 
 
         public string TypeNameAndPrice
         {

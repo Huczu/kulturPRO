@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using Database.Models;
+using Database.Services;
 using KulturPRO.ViewModels.Reservations;
 using KulturPRO.Views;
 
@@ -24,6 +25,7 @@ namespace KulturPRO.Views.Reservations
     {
         private readonly ReservationsListViewModel _parent;
         private readonly ReservationViewModel _reservationViewModel;
+        private readonly ReservationService _reservationService = new ReservationService();
 
         //for new reservation creation
         public ReservationView(ReservationsListViewModel parent, long eventId)
@@ -51,9 +53,30 @@ namespace KulturPRO.Views.Reservations
             RegisterEvents();
         }
 
+
+
         private void RegisterEvents()
         {
             ButtonSave.Click += Button_Save_OnClick;
+        }
+
+        public async void Button_AddSeat_OnClick(object senderr, RoutedEventArgs e)
+        {
+            if (await _reservationService.CanReserveForEvent(_reservationViewModel.Reservation.EventId))
+            {
+                SeatReservationView seatReservationView = new SeatReservationView(_reservationViewModel.Reservation,
+                    _reservationService.GetSeatReservationsForReservationId(_reservationViewModel.Reservation.Id).Result.Select(r => r.Seat).ToList());
+                seatReservationView.Closed += (sender, args) =>
+                {
+                    _reservationViewModel.UpdateView();
+                    ReservationHall.Content = new generating(_reservationViewModel.GetSeatsReserved(), _reservationViewModel.Reservation.Event.CinemaHallId, false);
+                };
+                seatReservationView.Show();
+            }
+            else
+            {
+                MessageBox.Show("Brak wolnych miejsc");
+            }
         }
 
         public void Grid_DoubleClick(object sender, MouseButtonEventArgs e)
@@ -64,7 +87,7 @@ namespace KulturPRO.Views.Reservations
             {
                 var item = row.Item as SeatReservation;
 
-                SeatReservationView seatReservationDetails = new SeatReservationView(item.Id);
+                SeatReservationView seatReservationDetails = new SeatReservationView(item.Id, item.ReservationId);
                 seatReservationDetails.Show();
             }
         }

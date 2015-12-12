@@ -92,5 +92,18 @@ namespace Database.Services
                 return await context.SeatReservations.Include(sr => sr.Seat).Include(sr => sr.Ticket).Where(sr => sr.Id.Equals(id)).SingleAsync();
             }
         }
+
+        public async Task AddNewSeatReservation(SeatReservation seatReservation)
+        {
+            log.DebugFormat("adding new seat reservation for reservation id {0", seatReservation.ReservationId);
+
+            using (var context = new DatabaseContext())
+            {
+                context.SeatReservations.Add(seatReservation);
+                await context.SaveChangesAsync();
+            }
+
+            log.DebugFormat("added new seat reservation with id = {0}", seatReservation.Id);
+        }
     }
 }

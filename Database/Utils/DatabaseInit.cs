@@ -112,13 +112,15 @@ namespace Database.Utils
                 }
             });
 
-            context.Tickets.Add(new Ticket
+            var ticket = new Ticket
             {
                 TypeName = "Normalny",
                 Price = 20.0,
                 DiscountPercentage = 0.0,
                 IsDefaultEventPrice = true
-            });
+            };
+
+            context.Tickets.Add(ticket);
 
             context.SaveChanges(user.FullName);
             context.Events.AddRange(new List<Event>
@@ -130,8 +132,8 @@ namespace Database.Utils
                     Time = new TimeSpan(12,15,0),
                     ImagePath = "/Images/papa.jpg",
                     Description = "Film komediowy",
-                    DefaultTicketId = 1,
-                    CinemaHallId = 1
+                    CinemaHallId = 1,
+                    TicketTypes = new List<Ticket>(new [] {ticket})
                 },
                 new Event
                 {
@@ -140,8 +142,8 @@ namespace Database.Utils
                     Time = new TimeSpan(12,45,0),
                     ImagePath = "/Images/urban.jpg",
                     Description = "Film animowany dla młodszych",
-                    DefaultTicketId = 1,
-                    CinemaHallId = 1
+                    CinemaHallId = 1,
+                    TicketTypes = new List<Ticket>(new [] {ticket})
                 },
                 new Event
                 {
@@ -150,8 +152,8 @@ namespace Database.Utils
                     Time = new TimeSpan(10,0,0),
                     ImagePath = "/Images/vader.jpg",
                     Description = "Najnowsza część sagi",
-                    DefaultTicketId = 1,
-                    CinemaHallId = 1
+                    CinemaHallId = 1,
+                    TicketTypes = new List<Ticket>(new [] {ticket})
                 }
             });
             context.SaveChanges(user.FullName);
