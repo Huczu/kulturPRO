@@ -112,12 +112,20 @@ namespace Database.Services
 
             using (var context = new DatabaseContext())
             {
-                context.SeatReservations.Attach(seatReservation);
-                context.SeatReservations.Remove(seatReservation);
-                await context.SaveChangesAsync();
+                var item = await context.SeatReservations.FindAsync(seatReservation.Id);
 
-                log.DebugFormat("deleted seat reservation");
-                return true;
+                if (item != null)
+                {
+                    context.SeatReservations.Remove(item);
+                    await context.SaveChangesAsync();
+
+                    log.DebugFormat("deleted seat reservation");
+                    return true;
+                }
+                    
+                log.DebugFormat("seat reservation not found!");
+
+                return false;
             }
         }
     }
