@@ -52,6 +52,12 @@
                 <DataGridTextColumn Header="Ilość miejsc" Binding="{Binding Path=SeatReservations.Count}"/>
                 <DataGridTextColumn Header="Czy opłacono" Binding="{Binding Path=IsPaid, Converter={StaticResource boolConverter}}"/>
             </DataGrid.Columns>
+            <DataGrid.ContextMenu>
+                <ContextMenu>
+                    <MenuItem Header="Usuń" Click="Grid_ContextMenu_Delete_Click"
+                              CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=Parent}"/>
+                </ContextMenu>
+            </DataGrid.ContextMenu>
         </DataGrid>
         <Button
             Grid.Row="2"

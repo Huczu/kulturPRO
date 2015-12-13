@@ -78,5 +78,26 @@ namespace KulturPRO.Views.Reservations
                 MessageBox.Show("Brak wolnych miejsc");
             }
         }
+
+        private async void Grid_ContextMenu_Delete_Click(object sender, RoutedEventArgs e)
+        {
+            System.Windows.Controls.MenuItem row = sender as System.Windows.Controls.MenuItem;
+
+            if (row != null)
+            {
+                var contextMenu = row.CommandParameter as ContextMenu;
+
+                if (contextMenu != null)
+                {
+                    var grid = contextMenu.PlacementTarget as DataGrid;
+                    var toDeleteFromBindedList = (Reservation)grid.SelectedCells[0].Item;
+                    if (await _reservationService.DeleteReservation(toDeleteFromBindedList))
+                    {
+                        _reservationsListViewModel.UpdateReservationsList(toDeleteFromBindedList.EventId);
+                        UpdateReservationList(null, null);
+                    }
+                }
+            }
+        }
     }
 }

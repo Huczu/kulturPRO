@@ -155,5 +155,28 @@ namespace Database.Services
                 log.DebugFormat("updated reservation with id {0}", reservation.Id);
             }
         }
+
+        public async Task<bool> DeleteReservation(Reservation reservation)
+        {
+            log.DebugFormat("trying deleting reservation with id {0}", reservation.Id);
+
+            using (var context = new DatabaseContext())
+            {
+                var item = await context.Reservations.FindAsync(reservation.Id);
+
+                if (item != null)
+                {
+                    context.Reservations.Remove(item);
+                    await context.SaveChangesAsync();
+
+                    log.DebugFormat("deleted reservation");
+                    return true;
+                }
+
+                log.DebugFormat("reservation not found!");
+
+                return false;
+            }
+        }
     }
 }
