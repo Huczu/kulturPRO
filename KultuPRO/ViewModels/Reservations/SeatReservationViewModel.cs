@@ -86,7 +86,7 @@ namespace KulturPRO.ViewModels.Reservations
 
         public async void PostToAddNew()
         {
-            SeatReservation.Ticket = SelectedTicket;
+            SeatReservation.TicketId = SelectedTicket.Id;
             SeatReservation.SeatId = SelectedSeat.Id;
             await _reservationService.AddNewSeatReservation(SeatReservation);
         }
