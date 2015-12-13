@@ -84,11 +84,11 @@ namespace KulturPRO.Views
             grdMain.Columns = selectedHall.MaxColumns;
             grdMain.Rows = selectedHall.MaxRows;
 
-            bt = new Button[grdMain.Columns, grdMain.Rows];
+            bt = new Button[grdMain.Rows, grdMain.Columns];
 
             foreach (var seat in selectedHall.Seats)
             {
-                bt[seat.Column - 1, seat.Row - 1] = new Button
+                bt[seat.Row - 1, seat.Column - 1] = new Button
                 {
                     Height = height,
                     Width = width,
@@ -103,15 +103,15 @@ namespace KulturPRO.Views
                 };
 
                 if ((seat.State != SeatState.NotExists))
-                    bt[seat.Column - 1, seat.Row - 1].Click += SelectSeatEvent;
+                    bt[seat.Row - 1, seat.Column- 1].Click += SelectSeatEvent;
             }
 
             foreach (var seatTaken in seatsTaken)
             {
-                bt[seatTaken.Column - 1, seatTaken.Row - 1].IsEnabled = false;
-                bt[seatTaken.Column - 1, seatTaken.Row - 1].Focusable = false;
-                bt[seatTaken.Column - 1, seatTaken.Row - 1].Background = Brushes.Red;
-                bt[seatTaken.Column - 1, seatTaken.Row - 1].Foreground = Brushes.Red;
+                bt[seatTaken.Row - 1, seatTaken.Column - 1].IsEnabled = false;
+                bt[seatTaken.Row - 1, seatTaken.Column - 1].Focusable = false;
+                bt[seatTaken.Row - 1, seatTaken.Column - 1].Background = Brushes.Red;
+                bt[seatTaken.Row - 1, seatTaken.Column - 1].Foreground = Brushes.Red;
             }
 
             for (int i = 0; i < bt.GetLength(0); i++)
