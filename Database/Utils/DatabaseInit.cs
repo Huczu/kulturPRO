@@ -23,10 +23,10 @@ namespace Database.Utils
         {
             var user = new User
             {
-                Login = "test",
-                Password = "123",
-                FirstName = "test",
-                Surname = "testing"
+                Login = "Tester",
+                Password = "test",
+                FirstName = "Jan",
+                Surname = "Tester"
             };
 
             context.Users.Add(user);
@@ -44,31 +44,31 @@ namespace Database.Utils
             //        });
             //}
 
-            context.Users.AddRange(new List<User>
-                {
-                    new User
-                    {
-                        Login = "test1",
-                        Password = "123",
-                        FirstName = "test1",
-                        Surname = "testing1"
-                    },
-                    new User
-                    {
-                        Login = "test2",
-                        Password = "123",
-                        FirstName = "test3",
-                        Surname = "testing4"
-                    },
-                });
+            //context.Users.AddRange(new List<User>
+            //    {
+            //        new User
+            //        {
+            //            Login = "test1",
+            //            Password = "123",
+            //            FirstName = "test1",
+            //            Surname = "testing1"
+            //        },
+            //        new User
+            //        {
+            //            Login = "test2",
+            //            Password = "123",
+            //            FirstName = "test3",
+            //            Surname = "testing4"
+            //        },
+            //    });
             context.CinemaHalls.AddRange(new List<CinemaHall>
             { 
                 new CinemaHall
                 {
                     Id = 1,
-                    Name = "sala1",
-                    MaxRows = 2,
-                    MaxColumns = 2
+                    Name = "Sala kinowa 1",
+                    MaxRows = 3,
+                    MaxColumns = 5
                 }
             });
             
@@ -86,7 +86,7 @@ namespace Database.Utils
                 },
                 new Seat
                 {
-                   State = SeatState.NotExists,
+                   State = SeatState.Taken,
                    
                    Row=1,
                    Column=2,
@@ -97,17 +97,105 @@ namespace Database.Utils
                 {
                    State = SeatState.Free,
                    
-                   Row=2,
-                   Column=1,
+                   Row=1,
+                   Column=3,
                    CinemaHallId=1
 
                 },
                 new Seat
                 {
-                   State = SeatState.Taken,
+                   State = SeatState.Free,
+                   
+                   Row=1,
+                   Column=4,
+                   CinemaHallId=1
+                },
+                new Seat
+                {
+                   State = SeatState.Free,
+                   
+                   Row=1,
+                   Column=5,
+                   CinemaHallId=1
+                },
+                new Seat
+                {
+                   State = SeatState.NotExists,
+                   
+                   Row=2,
+                   Column=1,
+                   CinemaHallId=1
+                },
+                new Seat
+                {
+                   State = SeatState.Free,
                    
                    Row=2,
                    Column=2,
+                   CinemaHallId=1
+                },
+                new Seat
+                {
+                   State = SeatState.Free,
+                   
+                   Row=2,
+                   Column=3,
+                   CinemaHallId=1
+                },
+                new Seat
+                {
+                   State = SeatState.Free,
+                   
+                   Row=2,
+                   Column=4,
+                   CinemaHallId=1
+                },
+                new Seat
+                {
+                   State = SeatState.NotExists,
+                   
+                   Row=2,
+                   Column=5,
+                   CinemaHallId=1
+                },
+                new Seat
+                {
+                   State = SeatState.NotExists,
+                   
+                   Row=3,
+                   Column=1,
+                   CinemaHallId=1
+                },
+                new Seat
+                {
+                   State = SeatState.NotExists,
+                   
+                   Row=3,
+                   Column=2,
+                   CinemaHallId=1
+                },
+                new Seat
+                {
+                   State = SeatState.Free,
+                   
+                   Row=3,
+                   Column=3,
+                   CinemaHallId=1
+                },
+                new Seat
+                {
+                   State = SeatState.NotExists,
+                   
+                   Row=3,
+                   Column=4,
+                   CinemaHallId=1
+                },
+                new Seat
+                {
+                   State = SeatState.NotExists,
+                   
+                   Row=3,
+                   Column=5,
                    CinemaHallId=1
                 }
             });
@@ -130,7 +218,7 @@ namespace Database.Utils
                     Name = "Benny Hill",
                     Date = DateTime.Today.AddDays(1),
                     Time = new TimeSpan(12,15,0),
-                    ImagePath = "/Images/papa.jpg",
+                    ImagePath = "Images/papa.jpg",
                     Description = "Film komediowy",
                     CinemaHallId = 1,
                     TicketTypes = new List<Ticket>(new [] {ticket})
@@ -140,7 +228,7 @@ namespace Database.Utils
                     Name = "Królik Bugs - The Movie",
                     Date = DateTime.Today.AddDays(2),
                     Time = new TimeSpan(12,45,0),
-                    ImagePath = "/Images/urban.jpg",
+                    ImagePath = "Images/urban.jpg",
                     Description = "Film animowany dla młodszych",
                     CinemaHallId = 1,
                     TicketTypes = new List<Ticket>(new [] {ticket})
@@ -150,7 +238,7 @@ namespace Database.Utils
                     Name = "Gwiezdne Wojny 7",
                     Date = DateTime.Today.AddDays(3),
                     Time = new TimeSpan(10,0,0),
-                    ImagePath = "/Images/vader.jpg",
+                    ImagePath = "Images/vader.jpg",
                     Description = "Najnowsza część sagi",
                     CinemaHallId = 1,
                     TicketTypes = new List<Ticket>(new [] {ticket})
@@ -161,8 +249,8 @@ namespace Database.Utils
             context.Reservations.Add(new Reservation
             {
                 EventId = 1,
-                PersonFullName = "test test",
-                PhoneNumber = "123456789",
+                PersonFullName = "Jan Tester",
+                PhoneNumber = "661123987",
                 SeatReservations = new List<SeatReservation>
                 {
                     new SeatReservation
@@ -173,7 +261,7 @@ namespace Database.Utils
                     },
                     new SeatReservation
                     {
-                        SeatId = 4,
+                        SeatId = 2,
                         TicketId = 1,
                         IsPaid = false
                     }
