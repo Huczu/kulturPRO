@@ -25,5 +25,7 @@ namespace Database.Models
 
         [Description("Ilość kolumn")]
         public int MaxColumns { get; set; }
+
+        public ICollection<Seat> Seats { get; set; }
     }
 }

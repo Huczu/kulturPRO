@@ -130,14 +130,18 @@
     <Compile Include="ViewModels\FunctionalList.cs" />
     <Compile Include="ViewModels\IOnListViewModel.cs" />
     <Compile Include="ViewModels\RelayCommand.cs" />
+    <Compile Include="ViewModels\Reservations\CreateReservationViewModel.cs" />
+    <Compile Include="ViewModels\Reservations\ReservationsListViewModel.cs" />
+    <Compile Include="ViewModels\Reservations\ReservationViewModel.cs" />
+    <Compile Include="ViewModels\Reservations\SeatReservationViewModel.cs" />
     <Compile Include="ViewModels\ShowEventsOnListViewModel.cs" />
     <Compile Include="ViewModels\UserViewModel.cs" />
-    <Compile Include="Views\AddEventView.xaml.cs" >
-		<DependentUpon>AddEventView.xaml</DependentUpon>
-	</Compile>
-    <Compile Include="Views\EventAsListBoxItemView.xaml.cs" >
-		<DependentUpon>EventAsListBoxItemView.xaml</DependentUpon>
-	</Compile>
+    <Compile Include="Views\AddEventView.xaml.cs">
+      <DependentUpon>AddEventView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\EventAsListBoxItemView.xaml.cs">
+      <DependentUpon>EventAsListBoxItemView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\AdminView.xaml.cs">
       <DependentUpon>AdminView.xaml</DependentUpon>
     </Compile>
@@ -156,6 +160,18 @@
     <Compile Include="Views\Halls.xaml.cs">
       <DependentUpon>Halls.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Reservations\CreateReservationView.xaml.cs">
+      <DependentUpon>CreateReservationView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Reservations\ReservationsList.xaml.cs">
+      <DependentUpon>ReservationsList.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Reservations\ReservationView.xaml.cs">
+      <DependentUpon>ReservationView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Reservations\SeatReservationView.xaml.cs">
+      <DependentUpon>SeatReservationView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\SettingsControl.xaml.cs">
       <DependentUpon>SettingsControl.xaml</DependentUpon>
     </Compile>
@@ -163,8 +179,8 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Compile Include="Views\ShowEventsView.xaml.cs" >
-		<DependentUpon>ShowEventsView.xaml</DependentUpon>
+    <Compile Include="Views\ShowEventsView.xaml.cs">
+      <DependentUpon>ShowEventsView.xaml</DependentUpon>
     </Compile>
     <Page Include="Views\AddEventView.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -214,6 +230,22 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Views\Reservations\CreateReservationView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Reservations\ReservationsList.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Reservations\ReservationView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Reservations\SeatReservationView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\SettingsControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

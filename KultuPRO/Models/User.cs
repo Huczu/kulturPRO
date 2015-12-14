@@ -9,8 +9,8 @@ namespace KulturPRO.Model
 {
     class User : INotifyPropertyChanged
     {
-        string _login = "Pat";
-        string _password = "mikol";
+        string _login = "Tester";
+        string _password = "test";
 
         public string Login
         {

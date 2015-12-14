@@ -24,7 +24,7 @@ namespace Database.Services
         /// </summary>
         /// <param name="id">id w bazie danych</param>
         /// <returns></returns>
-        public async Task<Event> GetEventById(int id)
+        public async Task<Event> GetEventById(long id)
         {
             log.Info("Użytkownik Pat pobrał wydarzenie przez id");
             using (var context = new DatabaseContext())
@@ -94,8 +94,6 @@ namespace Database.Services
             }
         }
 
-
-
         public void DeleteEvent(Event Event)
         {
             log.Info("Użytkownik Pat usunął wydarzenie " + Event.Name);
@@ -104,6 +102,20 @@ namespace Database.Services
                 Event evvent = context.Events.Where(e => e.Id == Event.Id).First();
                 context.Events.Remove(evvent);
                 context.SaveChangesAsync();
+            }
+        }
+
+        public async Task<ICollection<Event>> GetEventsAfterDate(DateTime date)
+        {
+            log.DebugFormat("Getting events after date {0}", date);
+
+            using (var context = new DatabaseContext())
+            {
+                var events = await context.Events.Where(e => e.Date > date).OrderBy(e => e.Date).ToListAsync();
+
+                log.DebugFormat("Found {0} events", events.Count);
+
+                return events;
             }
         }
     }

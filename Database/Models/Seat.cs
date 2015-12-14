@@ -37,8 +37,13 @@ namespace Database.Models
 
         [Description("Id sali")]
         public long CinemaHallId { get; set; }
+
         [ForeignKey("CinemaHallId")]
         public virtual CinemaHall CinemaHall { get; set; }
 
+        public int SeatNumber
+        {
+            get { return Row + Column; }
+        }
     }
 }

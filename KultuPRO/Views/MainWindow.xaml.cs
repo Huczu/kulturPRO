@@ -37,6 +37,7 @@ namespace KulturPRO.Views
             AddNewItem(new ViewModels.CinemHallsOnListViewModel());
             AddNewItem(new ViewModels.AdminViewModel());
             AddNewItem(new ViewModels.ShowEventsOnListViewModel());
+            AddNewItem(new ViewModels.Reservations.ReservationsListViewModel());
         }
 
         private void brTop_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
