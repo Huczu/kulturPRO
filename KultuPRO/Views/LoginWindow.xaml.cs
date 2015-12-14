@@ -19,7 +19,13 @@ namespace KulturPRO.Views
     /// </summary>
     public partial class LoginWindow : Window
     {
-        
+        protected override void OnClosed(EventArgs e)
+        {
+            base.OnClosed(e);
+
+            Application.Current.Shutdown();
+        }
+
         double height = 600;
         double width = 600;
         public LoginWindow()

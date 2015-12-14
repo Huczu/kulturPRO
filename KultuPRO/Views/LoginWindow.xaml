@@ -56,14 +56,14 @@
                         </MultiBinding>
                     </Label.FontSize>
                 </Label>
-                <TextBox x:Name="tbPassword" Text="{Binding Source={StaticResource User}, Path=Password,Mode=TwoWay}" VerticalAlignment="Center" HorizontalAlignment="Stretch" Grid.Column="1" Grid.Row="1" Padding="0">
-                    <TextBox.FontSize>
+                <PasswordBox x:Name="tbPassword" PasswordChar="*" VerticalAlignment="Center" HorizontalAlignment="Stretch" Grid.Column="1" Grid.Row="1" Padding="0">
+                    <PasswordBox.FontSize>
                         <MultiBinding Converter="{StaticResource FontConverter}">
                             <Binding Source="{StaticResource Font30}"/>
                             <Binding Source="{StaticResource FontConverter}" Path="LoginWindowFontMultiplier"/>
                         </MultiBinding>
-                    </TextBox.FontSize>
-                </TextBox>
+                    </PasswordBox.FontSize>
+                </PasswordBox>
             </Grid>
         </Border>
 

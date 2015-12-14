@@ -21,7 +21,7 @@ namespace KulturPRO.Views
     public static class Globals
     {
         public static bool prawda = true;
-        
+
     }
     /// <summary>
     /// Interaction logic for generating.xaml
@@ -103,7 +103,7 @@ namespace KulturPRO.Views
                 };
 
                 if ((seat.State != SeatState.NotExists))
-                    bt[seat.Row - 1, seat.Column- 1].Click += SelectSeatEvent;
+                    bt[seat.Row - 1, seat.Column - 1].Click += SelectSeatEvent;
             }
 
             foreach (var seatTaken in seatsTaken)
@@ -135,12 +135,12 @@ namespace KulturPRO.Views
 
             _seatToSelect.Id = seatId;
         }
-        
+
         public void cbCinemaHall_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 
             grdMain.Children.Clear();
-            
+
 
             f1 = CHallObj.GetHallList();
             h1 = CHallObj.halls2();
@@ -149,7 +149,7 @@ namespace KulturPRO.Views
             grdMain.Rows = h1[cbCinemaHall.SelectedIndex].GetLength(0);
 
             bt = new Button[h1[cbCinemaHall.SelectedIndex].GetLength(0), h1[cbCinemaHall.SelectedIndex].GetLength(1)];
-            
+
             int numberToTagCounter = 0;
             for (int i = 0; i < bt.GetLength(0); i++)
             {
@@ -187,8 +187,8 @@ namespace KulturPRO.Views
                         bt[i, j].Background = Brushes.Green;
                         bt[i, j].Margin = new Thickness(1);
                         bt[i, j].Click += Button_Click;
-                        
-                        
+
+
                     }
                     if (h1[cbCinemaHall.SelectedIndex][i, j] == SeatState.Taken)
                     {
@@ -202,11 +202,11 @@ namespace KulturPRO.Views
                         bt[i, j].Background = Brushes.Coral;
                         bt[i, j].Margin = new Thickness(1);
                         bt[i, j].Click += Button_Click;
-                        
+
 
                     }
                 }
-                
+
             }
             for (int i = 0; i < bt.GetLength(0); i++)
             {
@@ -214,26 +214,26 @@ namespace KulturPRO.Views
                 {
                     if (bt[i, j] == null)
                         continue;                   //jeśli jest zerowe pole
-                    
+
                     grdMain.Children.Add(bt[i, j]); //dodajemy miejsce
 
-                    Grid.SetRow(grdMain.Children[grdMain.Children.Count - 1],i);
+                    Grid.SetRow(grdMain.Children[grdMain.Children.Count - 1], i);
                     Grid.SetColumn(grdMain.Children[grdMain.Children.Count - 1], j);
                 }
             }
 
         }
-       
+
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             string b = (sender as Button).Tag.ToString();
             string c = b.TrimEnd(')');
             string f = c.TrimStart('(');
-            int[] ints = ( f.Split(',')).Select(int.Parse).ToArray();
-            int columna = ints[0]+1;
-            int rzad = ints[1]+1;
-            int chid = ints[2]+1;
-            if(Globals.prawda)
+            int[] ints = (f.Split(',')).Select(int.Parse).ToArray();
+            int columna = ints[0] + 1;
+            int rzad = ints[1] + 1;
+            int chid = ints[2] + 1;
+            if (Globals.prawda)
             {
                 if ((sender as Button).Background == Brushes.Coral)
                 {
