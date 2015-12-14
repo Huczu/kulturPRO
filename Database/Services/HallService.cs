@@ -10,11 +10,11 @@ namespace Database.Services
 {
     public class HallService
     {
-        public async Task<CinemaHall> GetHallById(int id)
+        public async Task<CinemaHall> GetHallById(long id)
         {
             using (var context = new DatabaseContext())
             {
-                return await context.CinemaHalls.FindAsync(id);
+                return await context.CinemaHalls.Include(s => s.Seats).Where(s => s.Id.Equals(id)).SingleAsync();
             }
         }
 

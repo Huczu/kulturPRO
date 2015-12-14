@@ -33,5 +33,8 @@ namespace Database
         public DbSet<Seat> Seats { get; set; }
         public DbSet<Event> Events { get; set; }
         public DbSet<CinemaHall> CinemaHalls { get; set; }
+        public DbSet<Ticket> Tickets { get; set; }
+        public DbSet<SeatReservation> SeatReservations { get; set; }
+        public DbSet<Reservation> Reservations { get; set; }
     }
 }

@@ -52,5 +52,21 @@ namespace Database.Models
         /// </summary>
         [Description("Opis")]
         public string Description { get; set; }
+
+        public ICollection<Ticket> TicketTypes { get; set; }
+            
+        [Description("Id sali")]
+        public long CinemaHallId { get; set; }
+
+        [ForeignKey("CinemaHallId")]
+        public CinemaHall CinemaHall { get; set; }
+
+        public string NameWithDate
+        {
+            get
+            {
+                return Name + " " + Date.AddTicks(TimeSpanTicks);
+            }
+        }
     }
 }
